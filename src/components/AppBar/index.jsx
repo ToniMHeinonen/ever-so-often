@@ -7,6 +7,7 @@ const AppBar = () => {
     <Container>
       <ScrollView horizontal>
         <AppBarTab text="This Day" route="/" />
+        <AppBarTab text="New Reminder" route="/new-reminder" />
       </ScrollView>
     </Container>
   )

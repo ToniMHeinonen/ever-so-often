@@ -12,10 +12,12 @@
   "dependencies": {
     "expo": "~47.0.8",
     "expo-status-bar": "~1.4.2",
+    "formik": "^2.2.9",
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-router-native": "^6.5.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -9,9 +9,9 @@ const theme = {
     appBackground: '#1e1e1f',
   },
   fontSizes: {
-    body: 14,
-    heading1: 20,
-    appBarTab: 16,
+    body: '14px',
+    title: '20px',
+    appBarTab: '16px',
   },
   fonts: {
     main: Platform.select({

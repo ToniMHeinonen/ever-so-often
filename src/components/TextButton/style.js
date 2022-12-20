@@ -22,5 +22,4 @@ export const ButtonText = styled(Text).attrs({
   title: true,
 })`
   text-align: center;
-  padding: 2px 0px;
 `

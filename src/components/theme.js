@@ -5,10 +5,12 @@ const theme = {
     textPrimary: '#e8e8e8',
     textSecondary: '#c5c7c7',
     primary: '#f08411',
+    accent: '#00FFFF',
     appBarBackground: '#323536',
     appBackground: '#1e1e1f',
     contentBackground: '#232324',
     borderLight: '#999',
+    border: '#323536',
     error: '#d73a4a',
   },
   fontSizes: {

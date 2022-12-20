@@ -7,6 +7,7 @@ const theme = {
     primary: '#f08411',
     appBarBackground: '#323536',
     appBackground: '#1e1e1f',
+    contentBackground: '#232324',
     borderLight: '#999',
     error: '#d73a4a',
   },

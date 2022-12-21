@@ -1,6 +1,7 @@
 import { useField } from 'formik'
 import FormikErrorText from '../../styles/FormikErrorText'
 import DateInput from '../DateInput'
+import { Container } from './style'
 
 const FormikDateInput = ({ name, ...props }) => {
   const [field, meta, helpers] = useField(name)
@@ -12,10 +13,10 @@ const FormikDateInput = ({ name, ...props }) => {
   }
 
   return (
-    <>
+    <Container>
       <DateInput setDate={dateChanged} date={field.value} {...props} />
       {showError && <FormikErrorText>{meta.error}</FormikErrorText>}
-    </>
+    </Container>
   )
 }
 

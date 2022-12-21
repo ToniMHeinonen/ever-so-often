@@ -3,19 +3,21 @@ import React from 'react'
 import * as yup from 'yup'
 import FormikTextInput from '../FormikTextInput'
 import TextButton from '../TextButton'
-import { Container } from './style'
+import { Container, DateRow } from './style'
 import { format } from 'date-fns'
-import FormikDateInput from '../FormikDateInput'
 import SizedBox from '../../styles/SizedBox'
+import FormikDateInput from '../FormikDateInput'
 
 const initialValues = {
   title: '',
   startDate: format(new Date(), 'yyyy/MM/dd'),
+  endDate: '',
 }
 
 const validationSchema = yup.object().shape({
   title: yup.string().required('Title is required'),
   startDate: yup.string().required('Start date is required'),
+  endDate: yup.string(),
 })
 
 export const NewReminderFormContainer = ({ onSubmit }) => {
@@ -34,7 +36,10 @@ const NewReminderForm = ({ onSubmit }) => {
   return (
     <Container>
       <FormikTextInput name="title" placeholder="Title" />
-      <FormikDateInput name="startDate" />
+      <DateRow>
+        <FormikDateInput name="startDate" />
+        <FormikDateInput name="endDate" />
+      </DateRow>
       <SizedBox height={15} />
       <TextButton onPress={onSubmit}>Submit</TextButton>
     </Container>

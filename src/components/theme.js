@@ -30,7 +30,7 @@ const theme = {
     bold: '700',
   },
   borders: {
-    radiusDefault: '5px',
+    radiusDefault: '7px',
   },
 }
 

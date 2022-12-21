@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import Modal, { ModalContent, SlideAnimation } from 'react-native-modals'
-import { FormField } from '../../styles/FormField'
 import TextButton from '../TextButton'
 import theme from '../theme'
 import DateSelector from './DateSelector'
-import { DateButtonTextStyle } from './style'
+import { DateButtonStyle, DateButtonTextStyle } from './style'
 
 const DateInput = ({ date, setDate }) => {
   const [visible, setVisible] = useState(false)
@@ -13,7 +12,7 @@ const DateInput = ({ date, setDate }) => {
   return (
     <View>
       <TextButton
-        buttonStyle={FormField}
+        buttonStyle={DateButtonStyle}
         textStyle={DateButtonTextStyle}
         onPress={() => setVisible(true)}
       >

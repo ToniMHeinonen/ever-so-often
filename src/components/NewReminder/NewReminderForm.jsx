@@ -3,10 +3,11 @@ import React from 'react'
 import * as yup from 'yup'
 import FormikTextInput from '../FormikTextInput'
 import TextButton from '../TextButton'
-import { Container, DateRow } from './style'
+import { Container, DateRow, DateTitleRow } from './style'
 import { format } from 'date-fns'
 import SizedBox from '../../styles/SizedBox'
 import FormikDateInput from '../FormikDateInput'
+import { FormFieldTitle } from '../../styles/FormFieldTitle'
 
 const initialValues = {
   title: '',
@@ -37,8 +38,8 @@ const NewReminderForm = ({ onSubmit }) => {
     <Container>
       <FormikTextInput name="title" placeholder="Title" />
       <DateRow>
-        <FormikDateInput name="startDate" />
-        <FormikDateInput name="endDate" />
+        <FormikDateInput name="startDate" title="Start Date" />
+        <FormikDateInput name="endDate" title="End Date (optional)" />
       </DateRow>
       <SizedBox height={15} />
       <TextButton onPress={onSubmit}>Submit</TextButton>

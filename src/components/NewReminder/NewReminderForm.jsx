@@ -1,4 +1,4 @@
-import { Formik } from 'formik'
+import { FieldArray, Formik } from 'formik'
 import React from 'react'
 import * as yup from 'yup'
 import FormikTextInput from '../FormikTextInput'
@@ -7,11 +7,19 @@ import { Container, DateRow } from './style'
 import { format } from 'date-fns'
 import SizedBox from '../../styles/SizedBox'
 import FormikDateInput from '../FormikDateInput'
+import { View } from 'react-native'
+import Text from '../../styles/Text'
+
+const initialTask = {
+  text: '',
+  eachDay: '1',
+}
 
 const initialValues = {
   name: '',
   startDate: format(new Date(), 'yyyy/MM/dd'),
   endDate: '',
+  tasks: [initialTask],
 }
 
 const validationSchema = yup.object().shape({
@@ -27,12 +35,14 @@ export const NewReminderFormContainer = ({ onSubmit }) => {
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      {({ handleSubmit }) => <NewReminderForm onSubmit={handleSubmit} />}
+      {({ handleSubmit, values }) => (
+        <NewReminderForm onSubmit={handleSubmit} values={values} />
+      )}
     </Formik>
   )
 }
 
-const NewReminderForm = ({ onSubmit }) => {
+const NewReminderForm = ({ onSubmit, values }) => {
   return (
     <Container>
       <FormikTextInput
@@ -44,6 +54,32 @@ const NewReminderForm = ({ onSubmit }) => {
         <FormikDateInput name="startDate" title="Start Date" />
         <FormikDateInput name="endDate" title="End Date (optional)" />
       </DateRow>
+      <SizedBox height={15} />
+      <Text title center>
+        Tasks
+      </Text>
+      <FieldArray
+        name="tasks"
+        render={(arrayHelpers) => (
+          <View>
+            {values.tasks.map((reminder, index) => (
+              <View key={index}>
+                <FormikTextInput title="Task" name={`tasks[${index}].text`} />
+                <FormikTextInput
+                  title="Repeat every x days"
+                  name={`tasks[${index}].eachDay`}
+                />
+                <TextButton onPress={() => arrayHelpers.remove(index)}>
+                  Remove
+                </TextButton>
+              </View>
+            ))}
+            <TextButton onPress={() => arrayHelpers.push(initialTask)}>
+              Add
+            </TextButton>
+          </View>
+        )}
+      />
       <SizedBox height={15} />
       <TextButton onPress={onSubmit}>Submit</TextButton>
     </Container>

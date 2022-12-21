@@ -26,6 +26,12 @@ const Text = styled(NativeText)`
       font-size: ${theme.fontSizes.appBarTab};
       font-weight: ${theme.fontWeights.bold};
     `}
+
+    ${({ center }) =>
+    center &&
+    css`
+      text-align: center;
+    `}
 `
 
 export default Text

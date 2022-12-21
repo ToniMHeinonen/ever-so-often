@@ -1,7 +1,6 @@
 import { useField } from 'formik'
+import FormikErrorText from '../../styles/FormikErrorText'
 import TextInput from '../../styles/TextInput'
-
-import ErrorText from './style'
 
 const FormikTextInput = ({ name, ...props }) => {
   const [field, meta, helpers] = useField(name)
@@ -16,7 +15,7 @@ const FormikTextInput = ({ name, ...props }) => {
         error={showError}
         {...props}
       />
-      {showError && <ErrorText>{meta.error}</ErrorText>}
+      {showError && <FormikErrorText>{meta.error}</FormikErrorText>}
     </>
   )
 }

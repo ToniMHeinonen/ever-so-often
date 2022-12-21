@@ -27,7 +27,10 @@ const DateSelector = ({ date, setDate }) => {
       current={date}
       selected={date}
       style={styles.container}
-      onSelectedChange={(d) => setDate(d)}
+      onSelectedChange={(d) => {
+        if (date === d) return
+        setDate(d)
+      }}
     />
   )
 }

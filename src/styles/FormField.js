@@ -7,13 +7,20 @@ export const formFieldBaseStyles = css`
   margin: 5px;
   padding: 5px;
   border-width: 1px;
-  border-color: ${theme.colors.borderLight};
+  /* Colors must be defined individually so they can be overridden*/
+  border-left-color: ${theme.colors.borderLight};
+  border-right-color: ${theme.colors.borderLight};
+  border-top-color: ${theme.colors.borderLight};
+  border-bottom-color: ${theme.colors.borderLight};
   border-radius: ${theme.borders.radiusDefault};
 
   ${({ error }) =>
     error &&
     css`
-      border-color: ${theme.colors.error};
+      border-left-color: ${theme.colors.error};
+      border-right-color: ${theme.colors.error};
+      border-top-color: ${theme.colors.error};
+      border-bottom-color: ${theme.colors.error};
     `}
 
   ${({ pressed }) =>

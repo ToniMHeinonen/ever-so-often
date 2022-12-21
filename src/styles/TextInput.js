@@ -9,6 +9,8 @@ const TextInput = styled(NativeTextInput).attrs({
   ${formFieldBaseStyles}
   color: ${theme.colors.textPrimary};
   font-size: ${theme.fontSizes.body};
+  padding-left: 10px;
+  padding-right: 10px;
 `
 
 export default TextInput

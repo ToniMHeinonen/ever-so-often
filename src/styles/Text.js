@@ -7,6 +7,12 @@ const Text = styled(NativeText)`
   color: ${theme.colors.textPrimary};
   font-size: ${theme.fontSizes.body};
 
+  ${({ color }) =>
+    color &&
+    css`
+      color: ${color};
+    `}
+
   ${({ title }) =>
     title &&
     css`
@@ -27,7 +33,7 @@ const Text = styled(NativeText)`
       font-weight: ${theme.fontWeights.bold};
     `}
 
-    ${({ center }) =>
+  ${({ center }) =>
     center &&
     css`
       text-align: center;

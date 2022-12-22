@@ -1,16 +1,40 @@
 import { useField } from 'formik'
-import { View } from 'react-native'
+import {
+  HorizontalTitle,
+  VerticalCenterTitle,
+} from '../../styles/FormFieldTitle'
 import FormikErrorText from '../../styles/FormikErrorText'
-import { StyledTextInput, TextInputRow, TextInputTitle } from './style'
+import {
+  Container,
+  StyledTextInputHorizontal,
+  StyledTextInputVertical,
+  TextInputColumn,
+  TextInputRow,
+} from './style'
 
-const FormikTextInput = ({ name, title, ...props }) => {
+const FormikTextInput = ({ name, title, layout, ...props }) => {
   const [field, meta, helpers] = useField(name)
   const showError = meta.touched && meta.error
 
+  let Layout, Title, StyledTextInput
+
+  switch (layout) {
+    case 'horizontal':
+      Layout = TextInputRow
+      Title = HorizontalTitle
+      StyledTextInput = StyledTextInputHorizontal
+      break
+    default:
+      Layout = TextInputColumn
+      Title = VerticalCenterTitle
+      StyledTextInput = StyledTextInputVertical
+      break
+  }
+
   return (
-    <View>
-      <TextInputRow>
-        <TextInputTitle>{title}</TextInputTitle>
+    <Container>
+      <Layout>
+        <Title>{title}</Title>
         <StyledTextInput
           onChangeText={(value) => helpers.setValue(value)}
           onBlur={() => helpers.setTouched(true)}
@@ -18,9 +42,9 @@ const FormikTextInput = ({ name, title, ...props }) => {
           error={showError}
           {...props}
         />
-      </TextInputRow>
+      </Layout>
       {showError && <FormikErrorText>{meta.error}</FormikErrorText>}
-    </View>
+    </Container>
   )
 }
 

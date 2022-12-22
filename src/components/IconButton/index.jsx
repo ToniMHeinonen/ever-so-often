@@ -1,19 +1,28 @@
 import { Pressable } from 'react-native'
-import { Container } from './style'
-import Ionicons from '@expo/vector-icons/Ionicons'
+import { Container, StyledIonicons } from './style'
 import theme from '../theme'
 
-const IconButton = ({ onPress, name, size, color, style, ...props }) => {
+const IconButton = ({
+  onPress,
+  name,
+  size,
+  color,
+  styleComponent,
+  style,
+  ...props
+}) => {
+  const StyleContainer = styleComponent ?? Container
+
   return (
     <Pressable onPress={onPress} {...props}>
       {({ pressed }) => (
-        <Container style={style} pressed={pressed}>
-          <Ionicons
+        <StyleContainer style={style} pressed={pressed}>
+          <StyledIonicons
             name={name}
             size={size || 32}
             color={color || theme.colors.textPrimary}
           />
-        </Container>
+        </StyleContainer>
       )}
     </Pressable>
   )

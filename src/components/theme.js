@@ -11,6 +11,7 @@ const theme = {
     contentBackground: '#232324',
     borderLight: '#999',
     border: '#323536',
+    remove: '#ad1f2e',
     error: '#d73a4a',
   },
   fontSizes: {
@@ -31,6 +32,7 @@ const theme = {
   },
   borders: {
     radiusDefault: '7px',
+    widthDefault: '1px',
   },
 }
 

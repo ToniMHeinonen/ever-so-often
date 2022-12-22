@@ -5,7 +5,7 @@ export const formFieldBaseStyles = css`
   background-color: ${theme.colors.appBackground};
   margin: 5px;
   padding: 5px;
-  border-width: 1px;
+  border-width: ${theme.borders.widthDefault};
   /* Colors must be defined individually so they can be overridden*/
   border-left-color: ${theme.colors.borderLight};
   border-right-color: ${theme.colors.borderLight};

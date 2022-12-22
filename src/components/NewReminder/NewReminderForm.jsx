@@ -3,7 +3,7 @@ import React from 'react'
 import * as yup from 'yup'
 import FormikTextInput from '../FormikTextInput'
 import TextButton from '../TextButton'
-import { Container, Row } from './style'
+import { Container, RemoveButton, Row } from './style'
 import { format } from 'date-fns'
 import SizedBox from '../../styles/SizedBox'
 import FormikDateInput from '../FormikDateInput'
@@ -11,6 +11,8 @@ import { View } from 'react-native'
 import Text from '../../styles/Text'
 import FormikNumberInput from '../FormikNumberInput'
 import FormikArrayError from '../FormikArrayError'
+import IconButton from '../IconButton'
+import theme from '../theme'
 
 const initialActivity = {
   name: '',
@@ -74,6 +76,7 @@ const NewReminderForm = ({ onSubmit, values }) => {
       <Text title center>
         Activities
       </Text>
+      <SizedBox height={10} />
       <FieldArray
         name="activities"
         render={(arrayHelpers) => (
@@ -90,15 +93,21 @@ const NewReminderForm = ({ onSubmit, values }) => {
                     title="Target Day"
                     name={`activities[${index}].day`}
                   />
+                  <IconButton
+                    name="close"
+                    size={18}
+                    color={theme.colors.error}
+                    styleComponent={RemoveButton}
+                    onPress={() => arrayHelpers.remove(index)}
+                  />
                 </Row>
-                <TextButton onPress={() => arrayHelpers.remove(index)}>
-                  Remove
-                </TextButton>
+                <SizedBox height={10} />
               </View>
             ))}
-            <TextButton onPress={() => arrayHelpers.push(initialActivity)}>
-              Add
-            </TextButton>
+            <IconButton
+              name="add-circle"
+              onPress={() => arrayHelpers.push(initialActivity)}
+            />
           </View>
         )}
       />

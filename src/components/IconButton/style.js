@@ -4,6 +4,7 @@ import {
   formFieldBaseStyles,
   pressedContentColor,
 } from '../../styles/fragments'
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 export const Container = styled.View`
   ${formFieldBaseStyles}
@@ -12,4 +13,8 @@ export const Container = styled.View`
   ${pressedContentColor}
 
   ${customStyle}
+`
+
+export const StyledIonicons = styled(Ionicons)`
+  text-align: center;
 `

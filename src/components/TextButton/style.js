@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components/native'
+import styled from 'styled-components/native'
+import { pressedContentColor } from '../../styles/fragments'
 import Text from '../../styles/Text'
 import theme from '../theme'
 
@@ -10,11 +11,7 @@ export const Container = styled.View`
   border-radius: ${theme.borders.radiusDefault};
   border-color: ${theme.colors.primary};
 
-  ${({ pressed }) =>
-    pressed &&
-    css`
-      background-color: ${theme.colors.contentBackground};
-    `}
+  ${pressedContentColor}
 `
 
 export const ButtonText = styled(Text).attrs({

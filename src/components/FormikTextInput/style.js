@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { formFieldBaseStyles } from '../../styles/FormField'
+import { formFieldBaseStyles } from '../../styles/fragments'
 import Text from '../../styles/Text'
 import TextInput from '../../styles/TextInput'
 import theme from '../theme'

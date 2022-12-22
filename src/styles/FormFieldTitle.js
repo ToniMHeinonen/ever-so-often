@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import theme from '../components/theme'
-import { formFieldBaseStyles } from './FormField'
+import { formFieldBaseStyles } from './fragments'
 import Text from './Text'
 
 export const FormFieldTitle = styled(Text)`

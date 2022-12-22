@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import { TextInput as NativeTextInput } from 'react-native'
 import theme from '../components/theme'
-import { formFieldBaseStyles } from './FormField'
+import { customStyle, formFieldBaseStyles } from './fragments'
 
 const TextInput = styled(NativeTextInput).attrs({
   placeholderTextColor: theme.colors.textSecondary,
@@ -11,6 +11,8 @@ const TextInput = styled(NativeTextInput).attrs({
   font-size: ${theme.fontSizes.body};
   padding-left: 10px;
   padding-right: 10px;
+
+  ${customStyle}
 `
 
 export default TextInput

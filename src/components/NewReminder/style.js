@@ -6,7 +6,7 @@ export const Container = styled.View`
   padding: 15px;
 `
 
-export const DateRow = styled.View`
+export const Row = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `

@@ -13,6 +13,7 @@ const NumberInput = ({
   onBlur,
   minValue = 1,
   allowDecimals,
+  style,
   ...props
 }) => {
   const onFocusLost = () => {
@@ -45,13 +46,13 @@ const NumberInput = ({
       <IconButton
         name="remove"
         size={22}
-        style={minusButtonStyle}
+        style={[minusButtonStyle, style]}
         onPress={decrease}
       />
       <TextInput
         textAlign="center"
         keyboardType="numeric"
-        style={numberInputStyle}
+        style={[numberInputStyle, style]}
         onChangeText={onChange}
         onBlur={onFocusLost}
         value={value}
@@ -60,7 +61,7 @@ const NumberInput = ({
       <IconButton
         name="add"
         size={22}
-        style={plusButtonStyle}
+        style={[plusButtonStyle, style]}
         onPress={increase}
       />
     </Container>

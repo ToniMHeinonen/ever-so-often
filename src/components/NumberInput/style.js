@@ -7,6 +7,7 @@ export const Container = styled.View`
 `
 
 export const minusButtonStyle = css`
+  padding: 7px;
   border-right-width: 2px;
   margin-right: 0px;
   border-top-right-radius: 0px;
@@ -29,6 +30,7 @@ export const numberInputStyle = css`
 `
 
 export const plusButtonStyle = css`
+  padding: 7px;
   border-left-width: 2px;
   margin-left: 0px;
   border-top-left-radius: 0px;

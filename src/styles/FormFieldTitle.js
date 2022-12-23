@@ -9,7 +9,7 @@ const TitleTop = styled(Text)`
   margin-bottom: 0px;
   padding-bottom: 0px;
   padding-top: 2px;
-  border-bottom-width: 2px;
+  border-bottom-width: ${theme.borders.shadowWidth};
   border-bottom-color: ${theme.colors.appBackground};
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -30,7 +30,7 @@ export const TitleTopLeft = styled(TitleTop)`
 export const TitleLeft = styled(Text)`
   ${formFieldBaseStyles}
   margin-right: 0px;
-  border-right-width: 2px;
+  border-right-width: ${theme.borders.shadowWidth};
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   background-color: ${theme.colors.appBarBackground};

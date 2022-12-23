@@ -8,7 +8,7 @@ export const Container = styled.View`
 
 export const minusButtonStyle = css`
   padding: 7px;
-  border-right-width: 2px;
+  border-right-width: ${theme.borders.shadowWidth};
   margin-right: 0px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -27,11 +27,13 @@ export const numberInputStyle = css`
   border-radius: 0px;
   padding-left: 15px;
   padding-right: 15px;
+  border-right-width: 0px;
+  border-left-width: 0px;
 `
 
 export const plusButtonStyle = css`
   padding: 7px;
-  border-left-width: 2px;
+  border-left-width: ${theme.borders.shadowWidth};
   margin-left: 0px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;

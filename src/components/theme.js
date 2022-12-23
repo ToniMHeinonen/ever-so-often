@@ -33,6 +33,7 @@ const theme = {
   borders: {
     radiusDefault: '7px',
     widthDefault: '1px',
+    shadowWidth: '2px',
   },
 }
 

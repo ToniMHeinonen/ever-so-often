@@ -7,7 +7,7 @@ import { Container, RemoveButton, Row } from './style'
 import { format } from 'date-fns'
 import SizedBox from '../../styles/SizedBox'
 import FormikDateInput from '../FormikDateInput'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import Text from '../../styles/Text'
 import FormikNumberInput from '../FormikNumberInput'
 import FormikArrayError from '../FormikArrayError'
@@ -47,15 +47,17 @@ const validationSchema = yup.object().shape({
 
 export const NewReminderFormContainer = ({ onSubmit }) => {
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {({ handleSubmit, values }) => (
-        <NewReminderForm onSubmit={handleSubmit} values={values} />
-      )}
-    </Formik>
+    <ScrollView>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {({ handleSubmit, values }) => (
+          <NewReminderForm onSubmit={handleSubmit} values={values} />
+        )}
+      </Formik>
+    </ScrollView>
   )
 }
 

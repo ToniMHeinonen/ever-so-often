@@ -20,7 +20,7 @@ const NumberInput = ({
     const textValue = Number(value)
     const limitedValue = parseNumber(textValue)
 
-    onChange(limitedValue.toString())
+    onChange(limitedValue)
     onBlur()
   }
 
@@ -32,13 +32,13 @@ const NumberInput = ({
   const decrease = () => {
     const textValue = Number(value)
     const num = parseNumber(textValue - 1)
-    onChange(num.toString())
+    onChange(num)
   }
 
   const increase = () => {
     const textValue = Number(value)
     const num = parseNumber(textValue + 1)
-    onChange(num.toString())
+    onChange(num)
   }
 
   return (
@@ -55,7 +55,7 @@ const NumberInput = ({
         style={[numberInputStyle, style]}
         onChangeText={onChange}
         onBlur={onFocusLost}
-        value={value}
+        value={value.toString()}
         {...props}
       />
       <IconButton

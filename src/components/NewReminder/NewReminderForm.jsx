@@ -17,7 +17,7 @@ import _ from 'lodash'
 
 const initialActivity = {
   name: '',
-  day: '1',
+  day: 1,
 }
 
 const initialValues = {

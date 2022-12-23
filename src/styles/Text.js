@@ -13,6 +13,12 @@ const Text = styled(NativeText)`
       color: ${color};
     `}
 
+  ${({ fontSize }) =>
+    fontSize &&
+    css`
+      font-size: ${fontSize};
+    `}
+
   ${({ title }) =>
     title &&
     css`

@@ -70,7 +70,11 @@ const NewReminderForm = ({ onSubmit, values }) => {
       />
       <Row>
         <FormikDateInput name="startDate" title="Start Date" />
-        <FormikDateInput name="endDate" title="End Date (optional)" />
+        <FormikDateInput
+          name="endDate"
+          title="End Date"
+          placeholder="(optional)"
+        />
       </Row>
       <SizedBox height={15} />
       <Text title center>

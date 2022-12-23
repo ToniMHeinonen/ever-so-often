@@ -1,26 +1,21 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import Modal, { ModalContent, SlideAnimation } from 'react-native-modals'
-import TextButton from '../TextButton'
 import theme from '../theme'
+import DateButton from './DateButton'
+import DateHeader from './DateHeader'
 import DateSelector from './DateSelector'
-import { dateButtonStyle, DateButtonTextStyle } from './style'
 
 const DateInput = ({ date, setDate, placeholder }) => {
   const [visible, setVisible] = useState(false)
 
-  const showPlaceholder = date === ''
-
   return (
     <View>
-      <TextButton
-        buttonStyle={dateButtonStyle}
-        textStyleComponent={DateButtonTextStyle}
-        textProps={{ placeholder: showPlaceholder }}
-        onPress={() => setVisible(true)}
-      >
-        {showPlaceholder ? placeholder : date}
-      </TextButton>
+      <DateButton
+        date={date}
+        placeholder={placeholder}
+        setVisible={setVisible}
+      />
       <Modal
         width={0.9}
         visible={visible}
@@ -30,6 +25,7 @@ const DateInput = ({ date, setDate, placeholder }) => {
         modalStyle={{
           backgroundColor: 'rgba(0,0,0,0)',
         }}
+        modalTitle={<DateHeader setVisible={setVisible} setDate={setDate} />}
       >
         <ModalContent>
           <DateSelector date={date} setDate={setDate} />

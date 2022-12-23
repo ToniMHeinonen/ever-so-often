@@ -1,6 +1,6 @@
 import { useField } from 'formik'
 import { View } from 'react-native'
-import { VerticalCenterTitle } from '../../styles/FormFieldTitle'
+import { TitleTopCenter } from '../../styles/FormFieldTitle'
 import FormikErrorText from '../../styles/FormikErrorText'
 import NumberInput from '../NumberInput'
 import { numberInputStyle } from './style'
@@ -11,7 +11,7 @@ const FormikNumberInput = ({ name, title, ...props }) => {
 
   return (
     <View>
-      <VerticalCenterTitle>{title}</VerticalCenterTitle>
+      <TitleTopCenter>{title}</TitleTopCenter>
       <NumberInput
         onChange={(value) => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}

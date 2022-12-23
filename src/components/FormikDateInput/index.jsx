@@ -1,5 +1,5 @@
 import { useField } from 'formik'
-import { VerticalCenterTitle } from '../../styles/FormFieldTitle'
+import { TitleTopCenter } from '../../styles/FormFieldTitle'
 import FormikErrorText from '../../styles/FormikErrorText'
 import DateInput from '../DateInput'
 import { Container } from './style'
@@ -15,7 +15,7 @@ const FormikDateInput = ({ name, title, ...props }) => {
 
   return (
     <Container>
-      <VerticalCenterTitle>{title}</VerticalCenterTitle>
+      <TitleTopCenter>{title}</TitleTopCenter>
       <DateInput setDate={dateChanged} date={field.value} {...props} />
       {showError && <FormikErrorText>{meta.error}</FormikErrorText>}
     </Container>

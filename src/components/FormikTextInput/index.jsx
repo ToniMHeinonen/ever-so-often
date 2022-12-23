@@ -1,7 +1,8 @@
 import { useField } from 'formik'
 import {
-  HorizontalTitle,
-  VerticalCenterTitle,
+  TitleLeft,
+  TitleTopCenter,
+  TitleTopLeft,
 } from '../../styles/FormFieldTitle'
 import FormikErrorText from '../../styles/FormikErrorText'
 import {
@@ -21,12 +22,18 @@ const FormikTextInput = ({ name, title, layout, ...props }) => {
   switch (layout) {
     case 'horizontal':
       Layout = TextInputRow
-      Title = HorizontalTitle
+      Title = TitleLeft
       StyledTextInput = StyledTextInputHorizontal
       break
+    case 'vertical-left':
+      Layout = TextInputColumn
+      Title = TitleTopLeft
+      StyledTextInput = StyledTextInputVertical
+      break
+    case 'vertical':
     default:
       Layout = TextInputColumn
-      Title = VerticalCenterTitle
+      Title = TitleTopCenter
       StyledTextInput = StyledTextInputVertical
       break
   }

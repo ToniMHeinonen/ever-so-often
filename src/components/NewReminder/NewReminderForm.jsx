@@ -92,6 +92,7 @@ const NewReminderForm = ({ onSubmit, values }) => {
                     title="Name"
                     placeholder="Activity for the day..."
                     name={`activities[${index}].name`}
+                    layout="vertical-left"
                   />
                   <FormikNumberInput
                     title="Target Day"

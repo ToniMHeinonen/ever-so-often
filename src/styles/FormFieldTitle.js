@@ -3,11 +3,9 @@ import theme from '../components/theme'
 import { formFieldBaseStyles } from './fragments'
 import Text from './Text'
 
-export const VerticalCenterTitle = styled(Text)`
+const TitleTop = styled(Text)`
   ${formFieldBaseStyles}
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 0px;
   padding-bottom: 0px;
   padding-top: 2px;
@@ -19,7 +17,17 @@ export const VerticalCenterTitle = styled(Text)`
   color: ${theme.colors.textSecondary};
 `
 
-export const HorizontalTitle = styled(Text)`
+export const TitleTopCenter = styled(TitleTop)`
+  margin-left: auto;
+  margin-right: auto;
+`
+
+export const TitleTopLeft = styled(TitleTop)`
+  margin-left: 15px;
+  margin-right: auto;
+`
+
+export const TitleLeft = styled(Text)`
   ${formFieldBaseStyles}
   margin-right: 0px;
   border-right-width: 2px;

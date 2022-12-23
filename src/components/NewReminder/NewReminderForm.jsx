@@ -13,6 +13,7 @@ import FormikNumberInput from '../FormikNumberInput'
 import FormikArrayError from '../FormikArrayError'
 import IconButton from '../IconButton'
 import theme from '../theme'
+import _ from 'lodash'
 
 const initialActivity = {
   name: '',
@@ -25,6 +26,34 @@ const initialValues = {
   endDate: '',
   activities: [initialActivity],
 }
+
+yup.addMethod(yup.array, 'uniqueProperty', function (propertyPath, message) {
+  return this.test('unique', '', function (list) {
+    const errors = []
+
+    list.forEach((item, index) => {
+      const propertyValue = _.get(item, propertyPath)
+
+      if (
+        propertyValue &&
+        _.filter(list, [propertyPath, propertyValue]).length > 1
+      ) {
+        errors.push(
+          this.createError({
+            path: `${this.path}[${index}].${propertyPath}`,
+            message,
+          })
+        )
+      }
+    })
+
+    if (!_.isEmpty(errors)) {
+      throw new yup.ValidationError(errors)
+    }
+
+    return true
+  })
+})
 
 const validationSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -41,6 +70,7 @@ const validationSchema = yup.object().shape({
           .required('Day is required'),
       })
     )
+    .uniqueProperty('day', 'Day must be unique')
     .required('Activities are required')
     .min(1, 'At least 1 activity is required'),
 })

@@ -3,19 +3,24 @@ import { ButtonText, Container } from './style'
 
 const TextButton = ({
   onPress,
-  textColor,
+  buttonProps,
   buttonStyle,
+  buttonStyleComponent,
+  textProps,
   textStyle,
+  textStyleComponent,
   ...props
 }) => {
-  const ButtonStyle = buttonStyle ?? Container
-  const TextStyle = textStyle ?? ButtonText
+  const ButtonStyle = buttonStyleComponent ?? Container
+  const TextStyle = textStyleComponent ?? ButtonText
 
   return (
     <Pressable onPress={onPress} {...props}>
       {({ pressed }) => (
-        <ButtonStyle pressed={pressed}>
-          <TextStyle color={textColor}>{props.children}</TextStyle>
+        <ButtonStyle pressed={pressed} style={buttonStyle} {...buttonProps}>
+          <TextStyle style={textStyle} {...textProps}>
+            {props.children}
+          </TextStyle>
         </ButtonStyle>
       )}
     </Pressable>

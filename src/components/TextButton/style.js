@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { pressedContentColor } from '../../styles/fragments'
+import { customStyle, pressedContentColor } from '../../styles/fragments'
 import Text from '../../styles/Text'
 import theme from '../theme'
 
@@ -12,6 +12,8 @@ export const Container = styled.View`
   border-color: ${theme.colors.primary};
 
   ${pressedContentColor}
+
+  ${customStyle}
 `
 
 export const ButtonText = styled(Text).attrs({
@@ -19,4 +21,6 @@ export const ButtonText = styled(Text).attrs({
   title: true,
 })`
   text-align: center;
+
+  ${customStyle}
 `

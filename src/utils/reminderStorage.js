@@ -22,6 +22,10 @@ class ReminderStorage {
     reminders.push(reminder)
     await AsyncStorage.setItem(this.namespace, JSON.stringify(reminders))
   }
+
+  async clearReminders() {
+    await AsyncStorage.removeItem(this.namespace)
+  }
 }
 
 export default ReminderStorage

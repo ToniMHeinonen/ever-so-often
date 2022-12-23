@@ -2,9 +2,9 @@ import { StatusBar } from 'expo-status-bar'
 import { Route, Routes, Navigate } from 'react-router-native'
 import AppBar from '../AppBar'
 import NewReminder from '../NewReminder'
-import ThisDayPage from '../ThisDayPage'
 import { Container } from './style'
 import theme from '../theme'
+import HomePage from '../HomePage'
 
 const Main = () => {
   return (
@@ -15,7 +15,7 @@ const Main = () => {
       />
       <AppBar />
       <Routes>
-        <Route path="/" element={<ThisDayPage />} exact />
+        <Route path="/" element={<HomePage />} exact />
         <Route path="/new-reminder" element={<NewReminder />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

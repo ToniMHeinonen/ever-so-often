@@ -33,7 +33,23 @@ describe('getReminderActiveDay()', () => {
     ],
   }
 
-  it('today should return 1', () => {
-    expect(getReminderActiveDay(reminder, new Date())).toBe(1)
+  it('start date should return 1', () => {
+    expect(getReminderActiveDay(reminder, new Date('2022/01/01'))).toBe(1)
+  })
+
+  it('next day should return 2', () => {
+    expect(getReminderActiveDay(reminder, new Date('2022/01/02'))).toBe(2)
+  })
+  it('fifth day should return 5', () => {
+    expect(getReminderActiveDay(reminder, new Date('2022/01/05'))).toBe(5)
+  })
+  it('sixth day should return 1', () => {
+    expect(getReminderActiveDay(reminder, new Date('2022/01/06'))).toBe(1)
+  })
+  it('day 20 should return 5', () => {
+    expect(getReminderActiveDay(reminder, new Date('2022/01/20'))).toBe(5)
+  })
+  it('month 2 day 1 should return 2', () => {
+    expect(getReminderActiveDay(reminder, new Date('2022/02/01'))).toBe(2)
   })
 })

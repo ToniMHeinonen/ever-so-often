@@ -58,10 +58,9 @@ export const sortRemindersByActiveState = (reminders, currentDate) => {
  * @returns {[[object], [object]]} splitted reminders by active state, active in first array
  */
 export const splitRemindersByActiveState = (reminders, currentDate) => {
-  const [active, inactive] = _.partition(reminders, (r) => {
-    const day = getActiveDay(r, currentDate)
-    console.log('day', day)
-    return getActiveDay(r, currentDate) !== undefined
-  })
+  const [active, inactive] = _.partition(
+    reminders,
+    (r) => getActiveDay(r, currentDate) !== undefined
+  )
   return [active, inactive]
 }

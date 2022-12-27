@@ -27,12 +27,12 @@ export const getReminderActiveDay = (reminder, currentDate) => {
 }
 
 /**
- * Retrieves the active day for reminder.
+ * Retrieves the active activity for reminder.
  * @param {object} reminder reminder to check
  * @param {Date} currentDate current date
  * @returns found active activity, undefined if not active
  */
-export const getActiveDay = (reminder, currentDate) => {
+export const getActiveActivity = (reminder, currentDate) => {
   const activeDay = getReminderActiveDay(reminder, currentDate)
   return _.find(reminder.activities, { day: activeDay })
 }
@@ -46,7 +46,7 @@ export const getActiveDay = (reminder, currentDate) => {
 export const sortRemindersByActiveState = (reminders, currentDate) => {
   const sorted = _.sortBy(
     reminders,
-    (r) => getActiveDay(r, currentDate) === undefined
+    (r) => getActiveActivity(r, currentDate) === undefined
   )
   return sorted
 }
@@ -60,7 +60,7 @@ export const sortRemindersByActiveState = (reminders, currentDate) => {
 export const splitRemindersByActiveState = (reminders, currentDate) => {
   const [active, inactive] = _.partition(
     reminders,
-    (r) => getActiveDay(r, currentDate) !== undefined
+    (r) => getActiveActivity(r, currentDate) !== undefined
   )
   return [active, inactive]
 }

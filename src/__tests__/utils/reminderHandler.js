@@ -1,4 +1,5 @@
 import {
+  getActiveActivity,
   getActiveDay,
   getReminderActiveDay,
   getReminderMaxDay,
@@ -57,7 +58,7 @@ describe('getReminderActiveDay()', () => {
   })
 })
 
-describe('getActiveDay()', () => {
+describe('getActiveActivity()', () => {
   const reminder = {
     startDate: '2022/01/01',
     activities: [
@@ -68,23 +69,23 @@ describe('getActiveDay()', () => {
   }
 
   it('start date should return 1', () => {
-    expect(getActiveDay(reminder, new Date('2022/01/01')).day).toBe(1)
+    expect(getActiveActivity(reminder, new Date('2022/01/01')).day).toBe(1)
   })
 
   it('second day should return undefined', () => {
-    expect(getActiveDay(reminder, new Date('2022/01/02'))).toBe(undefined)
+    expect(getActiveActivity(reminder, new Date('2022/01/02'))).toBe(undefined)
   })
   it('third day should return 3', () => {
-    expect(getActiveDay(reminder, new Date('2022/01/03')).day).toBe(3)
+    expect(getActiveActivity(reminder, new Date('2022/01/03')).day).toBe(3)
   })
   it('fourth day should return undefined', () => {
-    expect(getActiveDay(reminder, new Date('2022/01/04'))).toBe(undefined)
+    expect(getActiveActivity(reminder, new Date('2022/01/04'))).toBe(undefined)
   })
   it('fifth day should return 5', () => {
-    expect(getActiveDay(reminder, new Date('2022/01/05')).day).toBe(5)
+    expect(getActiveActivity(reminder, new Date('2022/01/05')).day).toBe(5)
   })
   it('sixth day should return 1', () => {
-    expect(getActiveDay(reminder, new Date('2022/01/06')).day).toBe(1)
+    expect(getActiveActivity(reminder, new Date('2022/01/06')).day).toBe(1)
   })
 })
 

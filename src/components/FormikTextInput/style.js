@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 import TextInput from '../../styles/TextInput'
 
 export const Container = styled.View`
-  flex-grow: 1;
+  flex: 1;
 `
 
 export const TextInputRow = styled.View`

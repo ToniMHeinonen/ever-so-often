@@ -12,6 +12,8 @@ const NumberInput = ({
   onChange,
   onBlur,
   minValue = 1,
+  maxLength = 4,
+  minWidth = 40,
   allowDecimals,
   style,
   ...props
@@ -52,10 +54,11 @@ const NumberInput = ({
       <TextInput
         textAlign="center"
         keyboardType="numeric"
-        style={[numberInputStyle, style]}
+        style={[numberInputStyle, style, { minWidth: minWidth }]}
         onChangeText={onChange}
         onBlur={onFocusLost}
         value={value.toString()}
+        maxLength={maxLength}
         {...props}
       />
       <IconButton

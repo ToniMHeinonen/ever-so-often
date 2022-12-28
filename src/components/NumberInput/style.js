@@ -4,6 +4,7 @@ import theme from '../theme'
 
 export const Container = styled.View`
   flex-direction: row;
+  align-self: center;
 `
 
 export const minusButtonStyle = css`
@@ -24,11 +25,12 @@ export const minusButtonStyle = css`
 export const numberInputStyle = css`
   margin-left: 0px;
   margin-right: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
   border-radius: 0px;
-  padding-left: 15px;
-  padding-right: 15px;
   border-right-width: 0px;
   border-left-width: 0px;
+  min-width: 40px;
 `
 
 export const plusButtonStyle = css`

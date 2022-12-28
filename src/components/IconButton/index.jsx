@@ -1,6 +1,7 @@
 import { Pressable } from 'react-native'
-import { Container, StyledIonicons } from './style'
+import { Container } from './style'
 import theme from '../theme'
+import { Icon } from '../../styles/Icon'
 
 const IconButton = ({
   onPress,
@@ -17,7 +18,7 @@ const IconButton = ({
     <Pressable onPress={onPress} {...props}>
       {({ pressed }) => (
         <StyleContainer style={style} pressed={pressed}>
-          <StyledIonicons
+          <Icon
             name={name}
             size={size || 32}
             color={color || theme.colors.textPrimary}

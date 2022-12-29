@@ -4,9 +4,13 @@ import _ from 'lodash'
 /**
  * Retrieves maximum activity day for reminder.
  * @param {object} reminder reminder to check
- * @returns {number} maximum activity day
+ * @returns {number} maximum activity day or time frame if defined
  */
 export const getReminderMaxDay = (reminder) => {
+  // Return time frame if defined, since it is always the highest value
+  const timeFrame = reminder.timeFrame
+  if (timeFrame && timeFrame != '') return timeFrame
+
   return _.maxBy(reminder.activities, (a) => a.day).day
 }
 

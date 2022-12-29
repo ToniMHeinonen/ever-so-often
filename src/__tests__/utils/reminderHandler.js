@@ -21,22 +21,52 @@ const twoDayReminder = {
 const smallReminders = [oneDayReminder, twoDayReminder]
 
 describe('getReminderMaxDay()', () => {
-  const reminder1 = {
-    startDate: '2022/01/01',
-    activities: [{ day: 1 }, { day: 5 }, { day: 2 }],
-  }
+  it('reminder with highest day 5 should return 5', () => {
+    const reminder = {
+      startDate: '2022/01/01',
+      activities: [{ day: 1 }, { day: 5 }, { day: 2 }],
+    }
 
-  it('reminder1 should return 5', () => {
-    expect(getReminderMaxDay(reminder1)).toBe(5)
+    expect(getReminderMaxDay(reminder)).toBe(5)
   })
 
-  const reminder2 = {
-    startDate: '2022/01/01',
-    activities: [{ day: 10 }, { day: 4 }, { day: 120 }],
-  }
+  it('reminder with highest day 120 should return 120', () => {
+    const reminder = {
+      startDate: '2022/01/01',
+      activities: [{ day: 10 }, { day: 4 }, { day: 120 }],
+    }
 
-  it('reminder2 should return 120', () => {
-    expect(getReminderMaxDay(reminder2)).toBe(120)
+    expect(getReminderMaxDay(reminder)).toBe(120)
+  })
+
+  it('reminder with time frame 5 should return 5', () => {
+    const reminder = {
+      startDate: '2022/01/01',
+      timeFrame: 5,
+      activities: [{ day: 1 }, { day: 2 }, { day: 3 }],
+    }
+
+    expect(getReminderMaxDay(reminder)).toBe(5)
+  })
+
+  it('reminder with undefined time frame should return 3', () => {
+    const reminder = {
+      startDate: '2022/01/01',
+      timeFrame: undefined,
+      activities: [{ day: 1 }, { day: 2 }, { day: 3 }],
+    }
+
+    expect(getReminderMaxDay(reminder)).toBe(3)
+  })
+
+  it('reminder with empty time frame should return 3', () => {
+    const reminder = {
+      startDate: '2022/01/01',
+      timeFrame: '',
+      activities: [{ day: 1 }, { day: 2 }, { day: 3 }],
+    }
+
+    expect(getReminderMaxDay(reminder)).toBe(3)
   })
 
   it('oneDayReminder should return 1', () => {
@@ -70,6 +100,12 @@ describe('getReminderActiveDay()', () => {
   })
   it('sixth day should return 1', () => {
     expect(getReminderActiveDay(reminder, new Date('2022/01/06'))).toBe(1)
+  })
+  it('sixth day with time frame 6 should return 6', () => {
+    const alteredReminder = { ...reminder, timeFrame: 6 }
+    expect(getReminderActiveDay(alteredReminder, new Date('2022/01/06'))).toBe(
+      6
+    )
   })
   it('day 20 should return 5', () => {
     expect(getReminderActiveDay(reminder, new Date('2022/01/20'))).toBe(5)
@@ -134,6 +170,12 @@ describe('getActiveActivity()', () => {
     expect(getActiveActivity(oneDayReminder, new Date('2022/01/02')).day).toBe(
       1
     )
+  })
+  it('oneDayReminder second day with time frame 2 should return undefined', () => {
+    const alteredOneDayReminder = { ...oneDayReminder, timeFrame: 2 }
+    expect(
+      getActiveActivity(alteredOneDayReminder, new Date('2022/01/02'))
+    ).toBe(undefined)
   })
   it('twoDayReminder second day should return 2', () => {
     expect(getActiveActivity(twoDayReminder, new Date('2022/01/02')).day).toBe(
@@ -310,6 +352,19 @@ describe('Active state handlers', () => {
       expect(active[2].value).toBe(3)
       // 4 is active since it has 4 max days, so Activity 1 is active
       expect(active[3].value).toBe(4)
+    })
+    it('fifth day with time frame 5 should return [1, 2, 3] and [4]', () => {
+      const alteredReminders = [...reminders]
+      alteredReminders[3].timeFrame = 5
+
+      const [active, inactive] = splitRemindersByActiveState(
+        alteredReminders,
+        new Date('2022/01/05')
+      )
+      expect(active[0].value).toBe(1)
+      expect(active[1].value).toBe(2)
+      expect(active[2].value).toBe(3)
+      expect(inactive[0].value).toBe(4)
     })
     it('smallReminders start date should return [1, 2] and []', () => {
       const [active, inactive] = splitRemindersByActiveState(

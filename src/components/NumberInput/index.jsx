@@ -15,10 +15,13 @@ const NumberInput = ({
   maxLength = 4,
   minWidth = 40,
   allowDecimals,
+  allowEmpty,
   style,
   ...props
 }) => {
   const onFocusLost = () => {
+    if (allowEmpty && value === '') return
+
     const textValue = Number(value)
     const limitedValue = parseNumber(textValue)
 
@@ -59,6 +62,9 @@ const NumberInput = ({
         onBlur={onFocusLost}
         value={value.toString()}
         maxLength={maxLength}
+        // Use multiline to fix cursor jumping to right when input is modified to empty
+        multiline
+        numberOfLines={1}
         {...props}
       />
       <IconButton

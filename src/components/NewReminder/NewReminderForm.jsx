@@ -14,6 +14,8 @@ import FormikArrayError from '../FormikArrayError'
 import IconButton from '../IconButton'
 import theme from '../theme'
 import _ from 'lodash'
+import Padding from '../../styles/Padding'
+import { getReminderMaxDay } from '../../utils/reminderHandler'
 
 const initialActivity = {
   name: '',
@@ -24,6 +26,7 @@ const initialValues = {
   name: '',
   startDate: format(new Date(), 'yyyy/MM/dd'),
   endDate: '',
+  timeFrame: '',
   activities: [initialActivity],
 }
 
@@ -55,10 +58,30 @@ yup.addMethod(yup.array, 'uniqueProperty', function (propertyPath, message) {
   })
 })
 
+yup.addMethod(yup.mixed, 'moreThanMaxDay', function () {
+  return this.test('moreThanMaxDay', '', function (value) {
+    // Check only if value has been provided
+    if (!value) return true
+
+    const maxDay = getReminderMaxDay({ activities: this.parent.activities })
+
+    if (value < maxDay) {
+      const error = this.createError({
+        path: `${this.path}`,
+        message: 'Time frame must be at least the highest target day',
+      })
+      throw new yup.ValidationError(error)
+    }
+
+    return true
+  })
+})
+
 const validationSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
   startDate: yup.string().required('Start date is required'),
   endDate: yup.string(),
+  timeFrame: yup.mixed().moreThanMaxDay(),
   activities: yup
     .array()
     .of(
@@ -92,6 +115,9 @@ export const NewReminderFormContainer = ({ onSubmit }) => {
 }
 
 const NewReminderForm = ({ onSubmit, values }) => {
+  const paddingHeight = 10
+  const paddingLargeHeight = 15
+
   return (
     <Container>
       <FormikTextInput
@@ -100,19 +126,28 @@ const NewReminderForm = ({ onSubmit, values }) => {
         placeholder="Reminder name..."
         layout="horizontal"
       />
-      <Row>
-        <FormikDateInput name="startDate" title="Start Date" />
-        <FormikDateInput
-          name="endDate"
-          title="End Date"
-          placeholder="(optional)"
-        />
-      </Row>
-      <SizedBox height={15} />
-      <Text title center>
-        Activities
-      </Text>
-      <SizedBox height={10} />
+      <Padding paddingVertical={paddingHeight}>
+        <Row>
+          <FormikDateInput name="startDate" title="Start Date" />
+          <FormikDateInput
+            name="endDate"
+            title="End Date"
+            placeholder="(optional)"
+          />
+        </Row>
+      </Padding>
+      <FormikNumberInput
+        title="Time Frame"
+        name="timeFrame"
+        placeholder="(optional)"
+        minWidth={80}
+        allowEmpty
+      />
+      <Padding paddingTop={paddingLargeHeight} paddingBottom={paddingHeight}>
+        <Text title center>
+          Activities
+        </Text>
+      </Padding>
       <FieldArray
         name="activities"
         render={(arrayHelpers) => (
@@ -138,7 +173,7 @@ const NewReminderForm = ({ onSubmit, values }) => {
                     onPress={() => arrayHelpers.remove(index)}
                   />
                 </Row>
-                <SizedBox height={10} />
+                <SizedBox height={paddingHeight} />
               </View>
             ))}
             <IconButton
@@ -149,7 +184,7 @@ const NewReminderForm = ({ onSubmit, values }) => {
         )}
       />
       <FormikArrayError name="activities" />
-      <SizedBox height={15} />
+      <SizedBox height={paddingLargeHeight} />
       <TextButton onPress={onSubmit}>Save</TextButton>
     </Container>
   )

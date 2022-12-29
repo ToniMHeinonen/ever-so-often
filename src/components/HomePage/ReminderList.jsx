@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { FlatList, View } from 'react-native'
+import { View } from 'react-native'
 import useReminderStorage from '../../hooks/useReminderStorage'
-import Text from '../../styles/Text'
+import SizedBox from '../../styles/SizedBox'
 import { splitRemindersByActiveState } from '../../utils/reminderHandler'
+import DebugButtons from './DebugButtons'
 import Reminder from './Reminder'
 import { ReminderHeader, ReminderSeparator } from './style'
 
@@ -14,34 +15,38 @@ const ReminderList = () => {
   const currentDate = new Date()
 
   useEffect(() => {
-    const getReminders = async () => {
-      const reminders = await reminderStorage.getReminders()
-      const [active, inactive] = splitRemindersByActiveState(
-        reminders,
-        currentDate
-      )
-      setActiveReminders(active)
-      setInactiveReminders(inactive)
-    }
     getReminders()
   }, [])
 
+  const getReminders = async () => {
+    const reminders = await reminderStorage.getReminders()
+    const [active, inactive] = splitRemindersByActiveState(
+      reminders,
+      currentDate
+    )
+    setActiveReminders(active)
+    setInactiveReminders(inactive)
+  }
+
   return (
     <View>
-      <FlatList
-        data={activeReminders}
-        ListHeaderComponent={
-          <ReminderHeader title>{"Today's Activities"}</ReminderHeader>
-        }
-        ItemSeparatorComponent={ReminderSeparator}
-        renderItem={({ item }) => (
-          <Reminder key={item.id} reminder={item} currentDate={currentDate} />
-        )}
-      />
-      <Text title>Inactive reminders</Text>
-      {inactiveReminders.map((r) => (
-        <Reminder key={r.id} reminder={r} currentDate={currentDate} />
+      <ReminderHeader title>{"Today's Activities"}</ReminderHeader>
+      {activeReminders.map((r, index) => (
+        <View key={r.id}>
+          <Reminder reminder={r} currentDate={currentDate} />
+          {index < activeReminders.length - 1 && <ReminderSeparator />}
+        </View>
       ))}
+      <SizedBox height={20} />
+      <ReminderHeader title>{'Other Activities'}</ReminderHeader>
+      {inactiveReminders.map((r, index) => (
+        <View key={r.id}>
+          <Reminder reminder={r} currentDate={currentDate} />
+          {index < inactiveReminders.length - 1 && <ReminderSeparator />}
+        </View>
+      ))}
+      <SizedBox height={100} />
+      <DebugButtons onChange={getReminders} />
     </View>
   )
 }

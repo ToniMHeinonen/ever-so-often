@@ -1,4 +1,4 @@
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 import theme from '../theme'
 import Text from '../../styles/Text'
 import { pressedContentColor } from '../../styles/fragments'
@@ -32,6 +32,16 @@ export const ActiveContainer = styled.View`
   ${pressedContentColor}
 `
 
+export const InactiveContainer = styled.View`
+  background-color: ${theme.colors.appBackground};
+  border-color: ${theme.colors.accent};
+  border-width: 1px;
+  border-radius: ${theme.borders.radiusDefault};
+  margin: 0px 15px;
+
+  ${pressedContentColor}
+`
+
 export const ReminderIcon = styled(Icon)`
   margin: 10px;
 `
@@ -43,6 +53,16 @@ export const ActiveTextContainer = styled.View`
 
 export const ActiveTitle = styled(Text)``
 
+export const InactiveTitle = styled(Text)`
+  text-align: center;
+  margin: 15px;
+`
+
 export const ActiveActivity = styled(Text)`
   margin-top: 10px;
+`
+
+export const debugButtonStyle = css`
+  border-color: ${theme.colors.borderLight};
+  padding: 5px;
 `

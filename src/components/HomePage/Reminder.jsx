@@ -1,11 +1,12 @@
 import { Row } from '../../styles/layouts'
-import Text from '../../styles/Text'
 import { getActiveActivity } from '../../utils/reminderHandler'
 import Button from '../Button'
 import {
   ActiveContainer,
   ActiveTextContainer,
   ActiveTitle,
+  InactiveContainer,
+  InactiveTitle,
   ReminderIcon,
 } from './style'
 
@@ -24,7 +25,11 @@ const ActiveReminder = ({ reminder, activity }) => {
 }
 
 const InactiveReminder = ({ reminder }) => {
-  return <Text>{reminder.name}</Text>
+  return (
+    <Button component={InactiveContainer}>
+      <InactiveTitle title>{reminder.name}</InactiveTitle>
+    </Button>
+  )
 }
 
 const Reminder = ({ reminder, currentDate }) => {

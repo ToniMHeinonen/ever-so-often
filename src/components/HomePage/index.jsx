@@ -1,20 +1,14 @@
-import useReminderStorage from '../../hooks/useReminderStorage'
-import SizedBox from '../../styles/SizedBox'
-import TextButton from '../TextButton'
+import { ScrollView } from 'react-native'
 import ReminderList from './ReminderList'
 import { PageContainer } from './style'
 
 const HomePage = () => {
-  const reminderStorage = useReminderStorage()
-
   return (
-    <PageContainer>
-      <ReminderList />
-      <SizedBox height={100} />
-      <TextButton onPress={() => reminderStorage.clearReminders()}>
-        Clear reminders
-      </TextButton>
-    </PageContainer>
+    <ScrollView>
+      <PageContainer>
+        <ReminderList />
+      </PageContainer>
+    </ScrollView>
   )
 }
 

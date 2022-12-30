@@ -1,8 +1,8 @@
 import useReminderStorage from '../../hooks/useReminderStorage'
-import { NewReminderFormContainer } from './NewReminderForm'
 import { useNavigate } from 'react-router-native'
+import { ReminderFormContainer } from './ReminderForm'
 
-const NewReminder = () => {
+const ReminderPage = () => {
   const reminderStorage = useReminderStorage()
   const navigate = useNavigate()
 
@@ -15,7 +15,7 @@ const NewReminder = () => {
     }
   }
 
-  return <NewReminderFormContainer onSubmit={onSubmit} />
+  return <ReminderFormContainer onSubmit={onSubmit} />
 }
 
-export default NewReminder
+export default ReminderPage

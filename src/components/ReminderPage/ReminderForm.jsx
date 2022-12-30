@@ -98,7 +98,7 @@ const validationSchema = yup.object().shape({
     .min(1, 'At least 1 activity is required'),
 })
 
-export const NewReminderFormContainer = ({ onSubmit }) => {
+export const ReminderFormContainer = ({ onSubmit }) => {
   return (
     <ScrollView>
       <Formik
@@ -107,14 +107,14 @@ export const NewReminderFormContainer = ({ onSubmit }) => {
         validationSchema={validationSchema}
       >
         {({ handleSubmit, values }) => (
-          <NewReminderForm onSubmit={handleSubmit} values={values} />
+          <ReminderForm onSubmit={handleSubmit} values={values} />
         )}
       </Formik>
     </ScrollView>
   )
 }
 
-const NewReminderForm = ({ onSubmit, values }) => {
+const ReminderForm = ({ onSubmit, values }) => {
   const paddingHeight = 10
   const paddingLargeHeight = 15
 

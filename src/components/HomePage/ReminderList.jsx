@@ -2,7 +2,11 @@ import { View } from 'react-native'
 import { useNavigate } from 'react-router-native'
 import SizedBox from '../../styles/SizedBox'
 import Reminder from './Reminder'
-import { ReminderHeader, ReminderSeparator } from './style'
+import {
+  ReminderHeader,
+  ReminderListContainer,
+  ReminderSeparator,
+} from './style'
 
 const ReminderList = ({ currentDate, activeReminders, inactiveReminders }) => {
   const navigate = useNavigate()
@@ -12,7 +16,7 @@ const ReminderList = ({ currentDate, activeReminders, inactiveReminders }) => {
   }
 
   return (
-    <View>
+    <ReminderListContainer>
       <ReminderHeader title>{"Today's Activities"}</ReminderHeader>
       {activeReminders.map((r, index) => (
         <View key={r.id}>
@@ -36,7 +40,7 @@ const ReminderList = ({ currentDate, activeReminders, inactiveReminders }) => {
           {index < inactiveReminders.length - 1 && <ReminderSeparator />}
         </View>
       ))}
-    </View>
+    </ReminderListContainer>
   )
 }
 

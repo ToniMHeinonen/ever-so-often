@@ -43,8 +43,12 @@ const HomePage = () => {
           activeReminders={activeReminders}
           inactiveReminders={inactiveReminders}
         />
-        <SizedBox height={100} />
-        <DebugButtons onChange={getReminders} />
+        {__DEV__ && (
+          <>
+            <SizedBox height={100} />
+            <DebugButtons onChange={getReminders} />
+          </>
+        )}
       </PageContainer>
     </ScrollView>
   )

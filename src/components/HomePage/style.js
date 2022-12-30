@@ -12,6 +12,10 @@ export const ReminderSeparator = styled.View`
   padding: 10px 0px;
 `
 
+export const ReminderListContainer = styled.View`
+  padding-bottom: 20px;
+`
+
 export const ReminderHeader = styled(Text)`
   margin: 15px;
   padding: 5px 10px;

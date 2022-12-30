@@ -10,9 +10,9 @@ import {
   ReminderIcon,
 } from './style'
 
-const ActiveReminder = ({ reminder, activity }) => {
+const ActiveReminder = ({ reminder, activity, onPress }) => {
   return (
-    <Button component={ActiveContainer}>
+    <Button onPress={() => onPress(reminder.id)} component={ActiveContainer}>
       <Row>
         <ReminderIcon name="calendar" styleComponent={ReminderIcon} size={64} />
         <ActiveTextContainer>
@@ -24,20 +24,20 @@ const ActiveReminder = ({ reminder, activity }) => {
   )
 }
 
-const InactiveReminder = ({ reminder }) => {
+const InactiveReminder = ({ reminder, onPress }) => {
   return (
-    <Button component={InactiveContainer}>
+    <Button onPress={() => onPress(reminder.id)} component={InactiveContainer}>
       <InactiveTitle title>{reminder.name}</InactiveTitle>
     </Button>
   )
 }
 
-const Reminder = ({ reminder, currentDate }) => {
+const Reminder = ({ reminder, currentDate, onPress }) => {
   const activity = getActiveActivity(reminder, currentDate)
   return activity ? (
-    <ActiveReminder reminder={reminder} activity={activity} />
+    <ActiveReminder reminder={reminder} activity={activity} onPress={onPress} />
   ) : (
-    <InactiveReminder reminder={reminder} />
+    <InactiveReminder reminder={reminder} onPress={onPress} />
   )
 }
 

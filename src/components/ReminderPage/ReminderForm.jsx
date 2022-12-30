@@ -98,11 +98,12 @@ const validationSchema = yup.object().shape({
     .min(1, 'At least 1 activity is required'),
 })
 
-export const ReminderFormContainer = ({ onSubmit }) => {
+export const ReminderFormContainer = ({ onSubmit, values }) => {
+  const valuesToUse = { ...initialValues, ...values }
   return (
     <ScrollView>
       <Formik
-        initialValues={initialValues}
+        initialValues={valuesToUse}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >

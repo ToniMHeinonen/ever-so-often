@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { View } from 'react-native'
+import { useNavigate } from 'react-router-native'
 import useReminderStorage from '../../hooks/useReminderStorage'
 import SizedBox from '../../styles/SizedBox'
 import { splitRemindersByActiveState } from '../../utils/reminderHandler'
@@ -11,6 +12,7 @@ const ReminderList = () => {
   const [activeReminders, setActiveReminders] = useState([])
   const [inactiveReminders, setInactiveReminders] = useState([])
   const reminderStorage = useReminderStorage()
+  const navigate = useNavigate()
 
   const currentDate = new Date()
 
@@ -28,12 +30,20 @@ const ReminderList = () => {
     setInactiveReminders(inactive)
   }
 
+  const reminderOnPress = (id) => {
+    navigate(`/${id}`)
+  }
+
   return (
     <View>
       <ReminderHeader title>{"Today's Activities"}</ReminderHeader>
       {activeReminders.map((r, index) => (
         <View key={r.id}>
-          <Reminder reminder={r} currentDate={currentDate} />
+          <Reminder
+            reminder={r}
+            currentDate={currentDate}
+            onPress={reminderOnPress}
+          />
           {index < activeReminders.length - 1 && <ReminderSeparator />}
         </View>
       ))}
@@ -41,7 +51,11 @@ const ReminderList = () => {
       <ReminderHeader title>{'Other Activities'}</ReminderHeader>
       {inactiveReminders.map((r, index) => (
         <View key={r.id}>
-          <Reminder reminder={r} currentDate={currentDate} />
+          <Reminder
+            reminder={r}
+            currentDate={currentDate}
+            onPress={reminderOnPress}
+          />
           {index < inactiveReminders.length - 1 && <ReminderSeparator />}
         </View>
       ))}

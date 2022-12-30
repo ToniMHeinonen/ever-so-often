@@ -1,9 +1,9 @@
 import { Pressable, View } from 'react-native'
 
-const Button = ({ component, ...props }) => {
+const Button = ({ onPress, component, ...props }) => {
   const Component = component ?? View
   return (
-    <Pressable>
+    <Pressable onPress={onPress} {...props}>
       {({ pressed }) => (
         <Component pressed={pressed}>{props.children}</Component>
       )}

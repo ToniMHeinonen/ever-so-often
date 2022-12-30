@@ -24,6 +24,16 @@ class ReminderStorage {
     await AsyncStorage.setItem(this.namespace, JSON.stringify(reminders))
   }
 
+  async getReminder(id) {
+    const reminders = await this.getReminders()
+
+    if (reminders) {
+      return reminders.find((r) => r.id === id)
+    }
+
+    return null
+  }
+
   async addReminder(reminder) {
     reminder.id = uuid.v4()
 
@@ -31,6 +41,15 @@ class ReminderStorage {
     reminders.push(reminder)
 
     await AsyncStorage.setItem(this.namespace, JSON.stringify(reminders))
+  }
+
+  async updateReminder(reminder) {
+    const reminders = await this.getReminders()
+    const updatedReminders = reminders.map((r) =>
+      r.id !== reminder.id ? r : reminder
+    )
+
+    await AsyncStorage.setItem(this.namespace, JSON.stringify(updatedReminders))
   }
 
   async clearReminders() {

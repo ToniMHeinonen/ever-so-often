@@ -100,6 +100,7 @@ const validationSchema = yup.object().shape({
 
 export const ReminderFormContainer = ({ onSubmit, values }) => {
   const valuesToUse = { ...initialValues, ...values }
+  const newReminder = values === undefined
   return (
     <ScrollView>
       <Formik
@@ -108,14 +109,18 @@ export const ReminderFormContainer = ({ onSubmit, values }) => {
         validationSchema={validationSchema}
       >
         {({ handleSubmit, values }) => (
-          <ReminderForm onSubmit={handleSubmit} values={values} />
+          <ReminderForm
+            onSubmit={handleSubmit}
+            values={values}
+            newReminder={newReminder}
+          />
         )}
       </Formik>
     </ScrollView>
   )
 }
 
-const ReminderForm = ({ onSubmit, values }) => {
+const ReminderForm = ({ onSubmit, values, newReminder }) => {
   const paddingHeight = 10
   const paddingLargeHeight = 15
 
@@ -186,7 +191,9 @@ const ReminderForm = ({ onSubmit, values }) => {
       />
       <FormikArrayError name="activities" />
       <SizedBox height={paddingLargeHeight} />
-      <TextButton onPress={onSubmit}>Save</TextButton>
+      <TextButton onPress={onSubmit}>
+        {newReminder ? 'Submit' : 'Save'}
+      </TextButton>
     </Container>
   )
 }

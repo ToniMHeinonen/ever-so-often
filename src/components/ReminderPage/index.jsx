@@ -28,8 +28,8 @@ const ReminderPage = () => {
   const onSubmit = async (values) => {
     try {
       id
-        ? await reminderStorage.addReminder(values)
-        : await reminderStorage.updateReminder(values)
+        ? await reminderStorage.updateReminder(values)
+        : await reminderStorage.addReminder(values)
       navigate('/')
     } catch (error) {
       console.log(error)

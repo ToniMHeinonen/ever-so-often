@@ -79,8 +79,10 @@ yup.addMethod(yup.mixed, 'moreThanMaxDay', function () {
 
 const validationSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
-  startDate: yup.string().required('Start date is required'),
-  endDate: yup.string(),
+  startDate: yup.date().required('Start date is required'),
+  endDate: yup
+    .date()
+    .min(yup.ref('startDate'), 'End date must be later than start date'),
   timeFrame: yup.mixed().moreThanMaxDay(),
   activities: yup
     .array()

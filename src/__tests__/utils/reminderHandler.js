@@ -20,6 +20,22 @@ const twoDayReminder = {
 
 const smallReminders = [oneDayReminder, twoDayReminder]
 
+const endDateReminder1 = {
+  value: 1,
+  startDate: '2022/01/01',
+  endDate: '2022/01/01',
+  activities: [{ name: 'Activity 1', day: 1 }],
+}
+
+const endDateReminder2 = {
+  value: 2,
+  startDate: '2022/01/01',
+  endDate: '2022/01/02',
+  activities: [{ name: 'Activity 1', day: 1 }],
+}
+
+const endDateReminders = [endDateReminder1, endDateReminder2]
+
 describe('getReminderMaxDay()', () => {
   it('reminder with highest day 5 should return 5', () => {
     const reminder = {
@@ -140,7 +156,6 @@ describe('getActiveActivity()', () => {
   it('start date should return 1', () => {
     expect(getActiveActivity(reminder, new Date('2022/01/01')).day).toBe(1)
   })
-
   it('second day should return undefined', () => {
     expect(getActiveActivity(reminder, new Date('2022/01/02'))).toBe(undefined)
   })
@@ -182,47 +197,56 @@ describe('getActiveActivity()', () => {
       2
     )
   })
+  describe('end date defined', () => {
+    it('start date should return 1', () => {
+      expect(
+        getActiveActivity(endDateReminder1, new Date('2022/01/01')).day
+      ).toBe(1)
+    })
+    it('second day should return undefined', () => {
+      expect(getActiveActivity(endDateReminder1, new Date('2022/01/02'))).toBe(
+        undefined
+      )
+    })
+  })
 })
 
 describe('Active state handlers', () => {
-  const reminder1 = {
-    value: 1,
-    startDate: '2022/01/01',
-    activities: [
-      { name: 'Activity 3', day: 3 },
-      { name: 'Activity 5', day: 5 },
-    ],
-  }
-
-  const reminder2 = {
-    value: 2,
-    startDate: '2022/01/01',
-    activities: [
-      { name: 'Activity 1', day: 1 },
-      { name: 'Activity 5', day: 5 },
-    ],
-  }
-
-  const reminder3 = {
-    value: 3,
-    startDate: '2022/01/01',
-    activities: [
-      { name: 'Activity 3', day: 3 },
-      { name: 'Activity 5', day: 5 },
-    ],
-  }
-
-  const reminder4 = {
-    value: 4,
-    startDate: '2022/01/01',
-    activities: [
-      { name: 'Activity 1', day: 1 },
-      { name: 'Activity 3', day: 3 },
-      { name: 'Activity 4', day: 4 },
-    ],
-  }
-
-  const reminders = [reminder1, reminder2, reminder3, reminder4]
+  const reminders = [
+    {
+      value: 1,
+      startDate: '2022/01/01',
+      activities: [
+        { name: 'Activity 3', day: 3 },
+        { name: 'Activity 5', day: 5 },
+      ],
+    },
+    {
+      value: 2,
+      startDate: '2022/01/01',
+      activities: [
+        { name: 'Activity 1', day: 1 },
+        { name: 'Activity 5', day: 5 },
+      ],
+    },
+    {
+      value: 3,
+      startDate: '2022/01/01',
+      activities: [
+        { name: 'Activity 3', day: 3 },
+        { name: 'Activity 5', day: 5 },
+      ],
+    },
+    {
+      value: 4,
+      startDate: '2022/01/01',
+      activities: [
+        { name: 'Activity 1', day: 1 },
+        { name: 'Activity 3', day: 3 },
+        { name: 'Activity 4', day: 4 },
+      ],
+    },
+  ]
 
   describe('sortRemindersByActiveState()', () => {
     it('start date return order should be 2, 4, 1, 3', () => {
@@ -297,6 +321,35 @@ describe('Active state handlers', () => {
       expect(sorted[0].value).toBe(1)
       expect(sorted[1].value).toBe(2)
     })
+
+    describe('endDateReminders', () => {
+      it('start date return order should be 1, 2', () => {
+        const sorted = sortRemindersByActiveState(
+          endDateReminders,
+          new Date('2022/01/01')
+        )
+        expect(sorted[0].value).toBe(1)
+        expect(sorted[1].value).toBe(2)
+      })
+
+      it('second day return order should be 2, 1', () => {
+        const sorted = sortRemindersByActiveState(
+          endDateReminders,
+          new Date('2022/01/02')
+        )
+        expect(sorted[0].value).toBe(2)
+        expect(sorted[1].value).toBe(1)
+      })
+
+      it('third day return order should be 1, 2', () => {
+        const sorted = sortRemindersByActiveState(
+          endDateReminders,
+          new Date('2022/01/03')
+        )
+        expect(sorted[0].value).toBe(1)
+        expect(sorted[1].value).toBe(2)
+      })
+    })
   })
 
   describe('splitRemindersByActiveState()', () => {
@@ -366,23 +419,55 @@ describe('Active state handlers', () => {
       expect(active[2].value).toBe(3)
       expect(inactive[0].value).toBe(4)
     })
-    it('smallReminders start date should return [1, 2] and []', () => {
-      const [active, inactive] = splitRemindersByActiveState(
-        smallReminders,
-        new Date('2022/01/01')
-      )
-      expect(inactive.length).toBe(0)
-      expect(active[0].value).toBe(1)
-      expect(active[1].value).toBe(2)
+    describe('smallReminders', () => {
+      it('start date should return [1, 2] and []', () => {
+        const [active, inactive] = splitRemindersByActiveState(
+          smallReminders,
+          new Date('2022/01/01')
+        )
+        expect(inactive.length).toBe(0)
+        expect(active[0].value).toBe(1)
+        expect(active[1].value).toBe(2)
+      })
+      it('second day should return [1, 2] and []', () => {
+        const [active, inactive] = splitRemindersByActiveState(
+          smallReminders,
+          new Date('2022/01/02')
+        )
+        expect(inactive.length).toBe(0)
+        expect(active[0].value).toBe(1)
+        expect(active[1].value).toBe(2)
+      })
     })
-    it('smallReminders second day should return [1, 2] and []', () => {
-      const [active, inactive] = splitRemindersByActiveState(
-        smallReminders,
-        new Date('2022/01/02')
-      )
-      expect(inactive.length).toBe(0)
-      expect(active[0].value).toBe(1)
-      expect(active[1].value).toBe(2)
+    describe('endDateReminders', () => {
+      it('start date should return [1, 2] and []', () => {
+        const [active, inactive] = splitRemindersByActiveState(
+          endDateReminders,
+          new Date('2022/01/01')
+        )
+        expect(inactive.length).toBe(0)
+        expect(active[0].value).toBe(1)
+        expect(active[1].value).toBe(2)
+      })
+
+      it('second day should return [2] and [1]', () => {
+        const [active, inactive] = splitRemindersByActiveState(
+          endDateReminders,
+          new Date('2022/01/02')
+        )
+        expect(active[0].value).toBe(2)
+        expect(inactive[0].value).toBe(1)
+      })
+
+      it('third day should return [] and [1, 2]', () => {
+        const [active, inactive] = splitRemindersByActiveState(
+          endDateReminders,
+          new Date('2022/01/03')
+        )
+        expect(active.length).toBe(0)
+        expect(inactive[0].value).toBe(1)
+        expect(inactive[1].value).toBe(2)
+      })
     })
   })
 })

@@ -34,9 +34,17 @@ export const getReminderActiveDay = (reminder, currentDate) => {
  * Retrieves the active activity for reminder.
  * @param {object} reminder reminder to check
  * @param {Date} currentDate current date
- * @returns found active activity, undefined if not active
+ * @returns {object | undefined}found active activity, undefined if not active
  */
 export const getActiveActivity = (reminder, currentDate) => {
+  // If end date has already passed, return undefined
+  if (
+    reminder.endDate !== '' &&
+    differenceInDays(new Date(reminder.endDate), currentDate) < 0
+  ) {
+    return undefined
+  }
+
   const activeDay = getReminderActiveDay(reminder, currentDate)
   return _.find(reminder.activities, { day: activeDay })
 }

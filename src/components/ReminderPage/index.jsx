@@ -2,6 +2,7 @@ import useReminderStorage from '../../hooks/useReminderStorage'
 import { useNavigate, useParams } from 'react-router-native'
 import { ReminderFormContainer } from './ReminderForm'
 import { useEffect, useState } from 'react'
+import LoadingIcon from '../../styles/LoadingIcon'
 
 const ReminderPage = () => {
   const { id } = useParams()
@@ -38,7 +39,7 @@ const ReminderPage = () => {
   // Do not render ReminderFormContainer before reminder has been retrieved
   // if id is defined, since otherwise it does not function correctly
   if (id && !reminder) {
-    return null
+    return <LoadingIcon />
   }
 
   return <ReminderFormContainer onSubmit={onSubmit} values={reminder} />

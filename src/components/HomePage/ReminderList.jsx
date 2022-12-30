@@ -1,34 +1,11 @@
-import { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useNavigate } from 'react-router-native'
-import useReminderStorage from '../../hooks/useReminderStorage'
 import SizedBox from '../../styles/SizedBox'
-import { splitRemindersByActiveState } from '../../utils/reminderHandler'
-import DebugButtons from './DebugButtons'
 import Reminder from './Reminder'
 import { ReminderHeader, ReminderSeparator } from './style'
 
-const ReminderList = () => {
-  const [activeReminders, setActiveReminders] = useState([])
-  const [inactiveReminders, setInactiveReminders] = useState([])
-  const reminderStorage = useReminderStorage()
+const ReminderList = ({ currentDate, activeReminders, inactiveReminders }) => {
   const navigate = useNavigate()
-
-  const currentDate = new Date()
-
-  useEffect(() => {
-    getReminders()
-  }, [])
-
-  const getReminders = async () => {
-    const reminders = await reminderStorage.getReminders()
-    const [active, inactive] = splitRemindersByActiveState(
-      reminders,
-      currentDate
-    )
-    setActiveReminders(active)
-    setInactiveReminders(inactive)
-  }
 
   const reminderOnPress = (id) => {
     navigate(`/${id}`)
@@ -59,8 +36,6 @@ const ReminderList = () => {
           {index < inactiveReminders.length - 1 && <ReminderSeparator />}
         </View>
       ))}
-      <SizedBox height={100} />
-      <DebugButtons onChange={getReminders} />
     </View>
   )
 }

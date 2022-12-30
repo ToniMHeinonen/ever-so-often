@@ -1,6 +1,5 @@
 import { FieldArray, Formik } from 'formik'
 import React from 'react'
-import * as yup from 'yup'
 import FormikTextInput from '../FormikTextInput'
 import TextButton from '../TextButton'
 import { Container, RemoveButton, Row } from './style'
@@ -13,9 +12,9 @@ import FormikNumberInput from '../FormikNumberInput'
 import FormikArrayError from '../FormikArrayError'
 import IconButton from '../IconButton'
 import theme from '../theme'
-import _ from 'lodash'
+
 import Padding from '../../styles/Padding'
-import { getReminderMaxDay } from '../../utils/reminderHandler'
+import { validationSchema } from './validation'
 
 const initialActivity = {
   name: '',
@@ -29,76 +28,6 @@ const initialValues = {
   timeFrame: '',
   activities: [initialActivity],
 }
-
-yup.addMethod(yup.array, 'uniqueProperty', function (propertyPath, message) {
-  return this.test('unique', '', function (list) {
-    const errors = []
-
-    list.forEach((item, index) => {
-      const propertyValue = _.get(item, propertyPath)
-
-      if (
-        propertyValue &&
-        _.filter(list, [propertyPath, propertyValue]).length > 1
-      ) {
-        errors.push(
-          this.createError({
-            path: `${this.path}[${index}].${propertyPath}`,
-            message,
-          })
-        )
-      }
-    })
-
-    if (!_.isEmpty(errors)) {
-      throw new yup.ValidationError(errors)
-    }
-
-    return true
-  })
-})
-
-yup.addMethod(yup.mixed, 'moreThanMaxDay', function () {
-  return this.test('moreThanMaxDay', '', function (value) {
-    // Check only if value has been provided
-    if (!value) return true
-
-    const maxDay = getReminderMaxDay({ activities: this.parent.activities })
-
-    if (value < maxDay) {
-      const error = this.createError({
-        path: `${this.path}`,
-        message: 'Time frame must be at least the highest target day',
-      })
-      throw new yup.ValidationError(error)
-    }
-
-    return true
-  })
-})
-
-const validationSchema = yup.object().shape({
-  name: yup.string().required('Name is required'),
-  startDate: yup.date().required('Start date is required'),
-  endDate: yup
-    .date()
-    .min(yup.ref('startDate'), 'End date must be later than start date'),
-  timeFrame: yup.mixed().moreThanMaxDay(),
-  activities: yup
-    .array()
-    .of(
-      yup.object().shape({
-        name: yup.string().required('Name is required'),
-        day: yup
-          .number()
-          .typeError('Day must be a number')
-          .required('Day is required'),
-      })
-    )
-    .uniqueProperty('day', 'Day must be unique')
-    .required('Activities are required')
-    .min(1, 'At least 1 activity is required'),
-})
 
 export const ReminderFormContainer = ({ onSubmit, values }) => {
   const valuesToUse = { ...initialValues, ...values }

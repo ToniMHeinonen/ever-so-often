@@ -3,9 +3,11 @@ import { useNavigate, useParams } from 'react-router-native'
 import { ReminderFormContainer } from './ReminderForm'
 import { useEffect, useState } from 'react'
 import LoadingIcon from '../../styles/LoadingIcon'
+import { setAlert, useStateValue } from '../../state'
 
 const ReminderPage = () => {
   const { id } = useParams()
+  const [, dispatch] = useStateValue()
   const [reminder, setReminder] = useState(undefined)
   const reminderStorage = useReminderStorage()
   const navigate = useNavigate()
@@ -25,6 +27,30 @@ const ReminderPage = () => {
     }
   }
 
+  const onRemove = async () => {
+    const removeReminder = async () => {
+      await reminderStorage.removeReminder(reminder)
+      navigate('/')
+    }
+
+    const alert = {
+      title: 'Remove Reminder',
+      message: `Are you sure you want to remove reminder "${reminder.name}"?`,
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Remove',
+          onPress: removeReminder,
+          style: 'remove',
+        },
+      ],
+    }
+
+    dispatch(setAlert(alert))
+  }
+
   const onSubmit = async (values) => {
     try {
       id
@@ -42,7 +68,13 @@ const ReminderPage = () => {
     return <LoadingIcon />
   }
 
-  return <ReminderFormContainer onSubmit={onSubmit} values={reminder} />
+  return (
+    <ReminderFormContainer
+      onSubmit={onSubmit}
+      onRemove={onRemove}
+      values={reminder}
+    />
+  )
 }
 
 export default ReminderPage

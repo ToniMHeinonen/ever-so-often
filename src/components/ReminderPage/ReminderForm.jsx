@@ -2,7 +2,16 @@ import { FieldArray, Formik } from 'formik'
 import React from 'react'
 import FormikTextInput from '../FormikTextInput'
 import TextButton from '../TextButton'
-import { Container, RemoveButton, Row } from './style'
+import {
+  Container,
+  DeleteButton,
+  RemoveActivityView,
+  RemoveReminderView,
+  Row,
+  SaveButton,
+  saveButtonStyle,
+  UpdateButtonsRow,
+} from './style'
 import { format } from 'date-fns'
 import SizedBox from '../../styles/SizedBox'
 import FormikDateInput from '../FormikDateInput'
@@ -29,7 +38,7 @@ const initialValues = {
   activities: [initialActivity],
 }
 
-export const ReminderFormContainer = ({ onSubmit, values }) => {
+export const ReminderFormContainer = ({ onSubmit, onRemove, values }) => {
   const valuesToUse = { ...initialValues, ...values }
   const newReminder = values === undefined
   return (
@@ -42,6 +51,7 @@ export const ReminderFormContainer = ({ onSubmit, values }) => {
         {({ handleSubmit, values }) => (
           <ReminderForm
             onSubmit={handleSubmit}
+            onRemove={onRemove}
             values={values}
             newReminder={newReminder}
           />
@@ -51,9 +61,26 @@ export const ReminderFormContainer = ({ onSubmit, values }) => {
   )
 }
 
-const ReminderForm = ({ onSubmit, values, newReminder }) => {
+const ReminderForm = ({ onSubmit, onRemove, values, newReminder }) => {
   const paddingHeight = 10
   const paddingLargeHeight = 15
+
+  const newButtons = <TextButton onPress={onSubmit}>Submit</TextButton>
+
+  const updateButtons = (
+    <UpdateButtonsRow>
+      <SaveButton onPress={onSubmit} buttonStyle={saveButtonStyle}>
+        Save
+      </SaveButton>
+      <DeleteButton
+        name="trash"
+        size={32}
+        color={theme.colors.error}
+        styleComponent={RemoveReminderView}
+        onPress={onRemove}
+      />
+    </UpdateButtonsRow>
+  )
 
   return (
     <Container>
@@ -106,7 +133,7 @@ const ReminderForm = ({ onSubmit, values, newReminder }) => {
                     name="close"
                     size={18}
                     color={theme.colors.error}
-                    styleComponent={RemoveButton}
+                    styleComponent={RemoveActivityView}
                     onPress={() => arrayHelpers.remove(index)}
                   />
                 </Row>
@@ -122,9 +149,7 @@ const ReminderForm = ({ onSubmit, values, newReminder }) => {
       />
       <FormikArrayError name="activities" />
       <SizedBox height={paddingLargeHeight} />
-      <TextButton onPress={onSubmit}>
-        {newReminder ? 'Submit' : 'Save'}
-      </TextButton>
+      {newReminder ? newButtons : updateButtons}
     </Container>
   )
 }

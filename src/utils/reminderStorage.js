@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import uuid from 'react-native-uuid'
 import testReminders from '../../data/testReminders'
+import _ from 'lodash'
 
 class ReminderStorage {
   constructor(namespace = 'reminders') {
@@ -48,6 +49,13 @@ class ReminderStorage {
     const updatedReminders = reminders.map((r) =>
       r.id !== reminder.id ? r : reminder
     )
+
+    await AsyncStorage.setItem(this.namespace, JSON.stringify(updatedReminders))
+  }
+
+  async removeReminder(reminder) {
+    const reminders = await this.getReminders()
+    const updatedReminders = _.remove(reminders, (r) => r.id !== reminder.id)
 
     await AsyncStorage.setItem(this.namespace, JSON.stringify(updatedReminders))
   }

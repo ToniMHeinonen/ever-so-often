@@ -5,6 +5,7 @@ import { Container } from './style'
 import theme from '../theme'
 import HomePage from '../HomePage'
 import ReminderPage from '../ReminderPage'
+import AlertDialog from '../AlertDialog'
 
 const Main = () => {
   return (
@@ -20,6 +21,7 @@ const Main = () => {
         <Route path="/:id" element={<ReminderPage />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <AlertDialog />
     </Container>
   )
 }

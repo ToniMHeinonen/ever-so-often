@@ -3,9 +3,12 @@ import theme from '../theme'
 import Text from '../../styles/Text'
 import { pressedContentColor } from '../../styles/fragments'
 import { Icon } from '../../styles/Icon'
+import constants from '../../utils/constants'
 
 export const PageContainer = styled.View`
   background-color: ${theme.colors.contentBackground};
+  // TODO: Add better way later for handling bottom app bar margin
+  margin-bottom: ${constants.appBar.height + 'px'};
 `
 
 export const ReminderSeparator = styled.View`

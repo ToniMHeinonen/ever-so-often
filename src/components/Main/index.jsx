@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
 import { Route, Routes, Navigate } from 'react-router-native'
-import AppBar from '../AppBar'
-import { Container } from './style'
+import { Container, StatusBarStyle } from './style'
 import theme from '../theme'
 import HomePage from '../HomePage'
 import ReminderPage from '../ReminderPage'
 import AlertDialog from '../AlertDialog'
+import BottomAppBar from '../BottomAppBar'
 
 const Main = () => {
   return (
@@ -14,7 +14,7 @@ const Main = () => {
         backgroundColor={theme.colors.appBarBackground}
         style="light"
       />
-      <AppBar />
+      <StatusBarStyle />
       <Routes>
         <Route path="/" element={<HomePage />} exact />
         <Route path="/new-reminder" element={<ReminderPage />} exact />
@@ -22,6 +22,7 @@ const Main = () => {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <AlertDialog />
+      <BottomAppBar />
     </Container>
   )
 }

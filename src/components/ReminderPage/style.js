@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components/native'
 import { pressedContentColor } from '../../styles/fragments'
+import constants from '../../utils/constants'
 import IconButton from '../IconButton'
 import TextButton from '../TextButton'
 import theme from '../theme'
@@ -7,6 +8,8 @@ import theme from '../theme'
 export const Container = styled.View`
   background-color: ${theme.colors.contentBackground};
   padding: 15px;
+  // TODO: Add better way later for handling bottom app bar margin
+  margin-bottom: ${constants.appBar.height + 'px'};
 `
 
 export const Row = styled.View`

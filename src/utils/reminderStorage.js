@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import uuid from 'react-native-uuid'
-import testReminders from '../../data/testReminders'
 import _ from 'lodash'
 
 class ReminderStorage {
@@ -18,8 +17,7 @@ class ReminderStorage {
     return []
   }
 
-  async initializeTestReminders() {
-    const reminders = testReminders
+  async initializeReminders(reminders) {
     reminders.forEach((r) => (r.id = uuid.v4()))
 
     await AsyncStorage.setItem(this.namespace, JSON.stringify(reminders))

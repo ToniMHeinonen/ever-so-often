@@ -12,7 +12,6 @@ import {
   saveButtonStyle,
   UpdateButtonsRow,
 } from './style'
-import { format } from 'date-fns'
 import SizedBox from '../../styles/SizedBox'
 import FormikDateInput from '../FormikDateInput'
 import { ScrollView, View } from 'react-native'
@@ -24,6 +23,7 @@ import theme from '../theme'
 
 import Padding from '../../styles/Padding'
 import { validationSchema } from './validation'
+import { getFormattedNewDate } from '../../utils/reminderHandler'
 
 const initialActivity = {
   name: '',
@@ -32,7 +32,7 @@ const initialActivity = {
 
 const initialValues = {
   name: '',
-  startDate: format(new Date(), 'yyyy/MM/dd'),
+  startDate: getFormattedNewDate(),
   endDate: '',
   timeFrame: '',
   activities: [initialActivity],

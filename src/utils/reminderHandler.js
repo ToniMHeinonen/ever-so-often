@@ -1,4 +1,4 @@
-import { differenceInDays } from 'date-fns'
+import { differenceInDays, format } from 'date-fns'
 import _ from 'lodash'
 
 /**
@@ -76,3 +76,5 @@ export const splitRemindersByActiveState = (reminders, currentDate) => {
   )
   return [active, inactive]
 }
+
+export const getFormattedNewDate = () => format(new Date(), 'yyyy/MM/dd')

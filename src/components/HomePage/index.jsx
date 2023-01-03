@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
+import initialReminders from '../../../data/initialReminders'
+import useLocalStorage from '../../hooks/useLocalStorage'
 import useReminderStorage from '../../hooks/useReminderStorage'
 import LoadingIcon from '../../styles/LoadingIcon'
 import SizedBox from '../../styles/SizedBox'
+import constants from '../../utils/constants'
 import { splitRemindersByActiveState } from '../../utils/reminderHandler'
 import DebugButtons from './DebugButtons'
 import ReminderList from './ReminderList'
@@ -13,6 +16,7 @@ const HomePage = () => {
   const [inactiveReminders, setInactiveReminders] = useState([])
   const [loading, setLoading] = useState(true)
   const reminderStorage = useReminderStorage()
+  const localStorage = useLocalStorage()
 
   const currentDate = new Date()
 
@@ -22,6 +26,13 @@ const HomePage = () => {
 
   const getReminders = async () => {
     const reminders = await reminderStorage.getReminders()
+
+    if (reminders.length == 0 && !(await initialRemindersAdded())) {
+      // Refetch reminders after initialReminders have been added
+      getReminders()
+      return
+    }
+
     const [active, inactive] = splitRemindersByActiveState(
       reminders,
       currentDate
@@ -29,6 +40,21 @@ const HomePage = () => {
     setActiveReminders(active)
     setInactiveReminders(inactive)
     setLoading(false)
+  }
+
+  const initialRemindersAdded = async () => {
+    const remindersInitialized = await localStorage.getItem(
+      constants.localStorage.initialized,
+      false
+    )
+
+    if (!remindersInitialized) {
+      await reminderStorage.initializeReminders(initialReminders)
+      await localStorage.setItem(constants.localStorage.initialized, true)
+      return false
+    }
+
+    return true
   }
 
   if (loading) {

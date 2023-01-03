@@ -1,5 +1,5 @@
 import { View } from 'react-native'
-import {
+import testReminders, {
   activeTestReminder,
   inactiveTestReminder,
 } from '../../../data/testReminders'
@@ -12,7 +12,7 @@ const DebugButtons = ({ onChange }) => {
   const reminderStorage = useReminderStorage()
 
   const addTestReminders = async () => {
-    await reminderStorage.initializeTestReminders()
+    await reminderStorage.initializeReminders(testReminders)
     await onChange()
   }
 

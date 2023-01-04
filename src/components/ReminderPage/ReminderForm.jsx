@@ -24,6 +24,7 @@ import theme from '../theme'
 import Padding from '../../styles/Padding'
 import { validationSchema } from './validation'
 import { getFormattedNewDate } from '../../utils/reminderHandler'
+import GettingStarted from './GettingStarted'
 
 const initialActivity = {
   name: '',
@@ -84,6 +85,7 @@ const ReminderForm = ({ onSubmit, onRemove, values, newReminder }) => {
 
   return (
     <Container>
+      <GettingStarted />
       <FormikTextInput
         name="name"
         title="Name"

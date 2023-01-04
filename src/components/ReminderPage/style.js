@@ -12,6 +12,18 @@ export const Container = styled.View`
   margin-bottom: ${constants.appBar.height + 'px'};
 `
 
+export const gettingStartedButton = css`
+  background-color: ${theme.colors.appBarBackground};
+  border-color: ${theme.colors.borderLight};
+  margin-bottom: 15px;
+
+  ${pressedContentColor}
+`
+
+export const gettingStartedButtonText = css`
+  font-size: ${theme.fontSizes.body};
+`
+
 export const Row = styled.View`
   flex-direction: row;
   justify-content: space-between;

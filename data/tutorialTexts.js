@@ -11,8 +11,8 @@ export const gettingStartedText = `# Reminder Explanation
 # Example Reminder
 Start Date: 2023/01/01
 Time Frame: 3
-Day 1: Hogging
+Day 1: Jogging
 Day 2: Gym
 
-In this example, day 2023/01/01 is hogging, day 2023/01/02 is gym, day 2023/01/03 is nothing and day 2023/01/04 is hogging again. This repeats endlessly when End Date is not defined.
+In this example, day 2023/01/01 is jogging, day 2023/01/02 is gym, day 2023/01/03 is nothing and day 2023/01/04 is jogging again. This repeats endlessly when End Date is not defined.
 `

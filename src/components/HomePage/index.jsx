@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
+import { useCallback, useState } from 'react'
 import { ScrollView } from 'react-native'
 import initialReminders from '../../../data/initialReminders'
 import useLocalStorage from '../../hooks/useLocalStorage'
@@ -20,9 +21,11 @@ const HomePage = () => {
 
   const currentDate = new Date()
 
-  useEffect(() => {
-    getReminders()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      getReminders()
+    }, [])
+  )
 
   const getReminders = async () => {
     const reminders = await reminderStorage.getReminders()

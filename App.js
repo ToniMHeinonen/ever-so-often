@@ -1,18 +1,18 @@
 import { ModalPortal } from 'react-native-modals'
 import Main from './src/components/Main'
-import { NativeRouter } from 'react-router-native'
 import ReminderStorage from './src/utils/reminderStorage'
 import ReminderStorageContext from './src/contexts/ReminderStorageContext'
 import { StateProvider, reducer } from './src/state'
 import LocalStorage from './src/utils/localStorage'
 import LocalStorageContext from './src/contexts/LocalStorageContext'
+import { NavigationContainer } from '@react-navigation/native'
 
 const reminderStorage = new ReminderStorage()
 const localStorage = new LocalStorage()
 
 const App = () => {
   return (
-    <NativeRouter>
+    <NavigationContainer>
       <ReminderStorageContext.Provider value={reminderStorage}>
         <LocalStorageContext.Provider value={localStorage}>
           <StateProvider reducer={reducer}>
@@ -21,7 +21,7 @@ const App = () => {
           </StateProvider>
         </LocalStorageContext.Provider>
       </ReminderStorageContext.Provider>
-    </NativeRouter>
+    </NavigationContainer>
   )
 }
 

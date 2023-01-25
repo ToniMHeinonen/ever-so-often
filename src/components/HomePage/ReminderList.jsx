@@ -1,5 +1,5 @@
+import { useNavigation } from '@react-navigation/native'
 import { View } from 'react-native'
-import { useNavigate } from 'react-router-native'
 import SizedBox from '../../styles/SizedBox'
 import Text from '../../styles/Text'
 import Reminder from './Reminder'
@@ -10,10 +10,10 @@ import {
 } from './style'
 
 const ReminderList = ({ currentDate, activeReminders, inactiveReminders }) => {
-  const navigate = useNavigate()
+  const navigation = useNavigation()
 
   const reminderOnPress = (id) => {
-    navigate(`/${id}`)
+    navigation.navigate('Reminder', { id: id })
   }
 
   return (

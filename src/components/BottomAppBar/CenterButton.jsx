@@ -1,16 +1,22 @@
-import { useNavigate } from 'react-router-native'
+import { useNavigation } from '@react-navigation/native'
 import IconButton from '../IconButton'
 import { addButtonStyle } from './style'
 
 const CenterButton = ({ pathname }) => {
-  const navigate = useNavigate()
+  const navigation = useNavigation()
 
   const getProps = () => {
     switch (pathname) {
-      case '/':
-        return { name: 'add', onPress: () => navigate('/new-reminder') }
+      case 'Home':
+        return {
+          name: 'add',
+          onPress: () => navigation.navigate('Reminder'),
+        }
       default:
-        return { name: 'arrow-back', onPress: () => navigate('/') }
+        return {
+          name: 'arrow-back',
+          onPress: () => navigation.goBack(),
+        }
     }
   }
 

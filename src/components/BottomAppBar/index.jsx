@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-native'
 import CenterButton from './CenterButton'
 import {
   AppBarRow,
@@ -7,14 +6,14 @@ import {
   RightSideContainer,
 } from './style'
 
-const BottomAppBar = () => {
-  const location = useLocation()
+const BottomAppBar = ({ state }) => {
+  if (!state) return null
 
   return (
     <AppBarRow>
       <LeftSideContainer />
       <CenterContainer>
-        <CenterButton pathname={location.pathname} />
+        <CenterButton pathname={state.routes[state.routes.length - 1].name} />
       </CenterContainer>
       <RightSideContainer />
     </AppBarRow>

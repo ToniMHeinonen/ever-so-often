@@ -1,13 +1,18 @@
 import { StatusBar } from 'expo-status-bar'
-import { Route, Routes, Navigate } from 'react-router-native'
 import { Container, StatusBarStyle } from './style'
 import theme from '../theme'
 import HomePage from '../HomePage'
 import ReminderPage from '../ReminderPage'
 import AlertDialog from '../AlertDialog'
 import BottomAppBar from '../BottomAppBar'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { useState } from 'react'
+
+const Stack = createNativeStackNavigator()
 
 const Main = () => {
+  const [state, setState] = useState()
+
   return (
     <Container>
       <StatusBar
@@ -15,14 +20,24 @@ const Main = () => {
         style="light"
       />
       <StatusBarStyle />
-      <Routes>
-        <Route path="/" element={<HomePage />} exact />
-        <Route path="/new-reminder" element={<ReminderPage />} exact />
-        <Route path="/:id" element={<ReminderPage />} exact />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{ headerShown: false }}
+        screenListeners={{
+          state: (e) => {
+            setState(e.data.state)
+          },
+        }}
+      >
+        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen
+          name="Reminder"
+          component={ReminderPage}
+          initialParams={{}}
+        />
+      </Stack.Navigator>
       <AlertDialog />
-      <BottomAppBar />
+      <BottomAppBar state={state} />
     </Container>
   )
 }

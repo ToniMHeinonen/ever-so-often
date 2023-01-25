@@ -1,16 +1,16 @@
 import useReminderStorage from '../../hooks/useReminderStorage'
-import { useNavigate, useParams } from 'react-router-native'
 import { ReminderFormContainer } from './ReminderForm'
 import { useEffect, useState } from 'react'
 import LoadingIcon from '../../styles/LoadingIcon'
 import { setAlert, useStateValue } from '../../state'
+import { useNavigation } from '@react-navigation/native'
 
-const ReminderPage = () => {
-  const { id } = useParams()
+const ReminderPage = ({ route }) => {
+  const { id } = route.params
   const [, dispatch] = useStateValue()
   const [reminder, setReminder] = useState(undefined)
   const reminderStorage = useReminderStorage()
-  const navigate = useNavigate()
+  const navigation = useNavigation()
 
   useEffect(() => {
     retrieveReminder()
@@ -30,7 +30,7 @@ const ReminderPage = () => {
   const onRemove = async () => {
     const removeReminder = async () => {
       await reminderStorage.removeReminder(reminder)
-      navigate('/')
+      navigation.navigate('Home')
     }
 
     const alert = {
@@ -56,7 +56,7 @@ const ReminderPage = () => {
       id
         ? await reminderStorage.updateReminder(values)
         : await reminderStorage.addReminder(values)
-      navigate('/')
+      navigation.navigate('Home')
     } catch (error) {
       console.log(error)
     }

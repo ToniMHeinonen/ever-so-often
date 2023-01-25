@@ -41,7 +41,9 @@
   },
   "resolutions": {
     "styled-components": "^5",
-    "expo/**/qs": "6.7.3"
+    "expo/**/qs": "6.7.3",
+    "expo/fbemitter/fbjs/ua-parser-js": "0.7.33",
+    "**/json5": "1.0.2"
   },
   "private": true,
   "jest": {

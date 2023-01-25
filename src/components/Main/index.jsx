@@ -8,6 +8,7 @@ import BottomAppBar from '../BottomAppBar'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
+import constants from '../../utils/constants'
 
 const Stack = createNativeStackNavigator()
 
@@ -31,7 +32,7 @@ const Main = () => {
         />
         <StatusBarStyle />
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName={constants.route.home}
           screenOptions={{ headerShown: false }}
           screenListeners={{
             state: (e) => {
@@ -39,9 +40,9 @@ const Main = () => {
             },
           }}
         >
-          <Stack.Screen name="Home" component={HomePage} />
+          <Stack.Screen name={constants.route.home} component={HomePage} />
           <Stack.Screen
-            name="Reminder"
+            name={constants.route.reminder}
             component={ReminderPage}
             initialParams={{}}
           />

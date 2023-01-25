@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { View } from 'react-native'
 import SizedBox from '../../styles/SizedBox'
 import Text from '../../styles/Text'
+import constants from '../../utils/constants'
 import Reminder from './Reminder'
 import {
   ReminderHeader,
@@ -13,7 +14,7 @@ const ReminderList = ({ currentDate, activeReminders, inactiveReminders }) => {
   const navigation = useNavigation()
 
   const reminderOnPress = (id) => {
-    navigation.navigate('Reminder', { id: id })
+    navigation.navigate(constants.route.reminder, { id: id })
   }
 
   return (

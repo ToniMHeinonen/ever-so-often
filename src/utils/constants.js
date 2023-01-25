@@ -5,6 +5,10 @@ const constants = {
   localStorage: {
     initialized: 'initialized',
   },
+  route: {
+    home: 'Home',
+    reminder: 'Reminder',
+  },
 }
 
 export default constants

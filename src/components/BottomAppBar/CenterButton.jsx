@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
+import constants from '../../utils/constants'
 import IconButton from '../IconButton'
 import { addButtonStyle } from './style'
 
@@ -7,10 +8,10 @@ const CenterButton = ({ pathname }) => {
 
   const getProps = () => {
     switch (pathname) {
-      case 'Home':
+      case constants.route.home:
         return {
           name: 'add',
-          onPress: () => navigation.navigate('Reminder'),
+          onPress: () => navigation.navigate(constants.route.reminder),
         }
       default:
         return {

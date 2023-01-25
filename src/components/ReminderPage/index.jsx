@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import LoadingIcon from '../../styles/LoadingIcon'
 import { setAlert, useStateValue } from '../../state'
 import { useNavigation } from '@react-navigation/native'
+import constants from '../../utils/constants'
 
 const ReminderPage = ({ route }) => {
   const { id } = route.params
@@ -30,7 +31,7 @@ const ReminderPage = ({ route }) => {
   const onRemove = async () => {
     const removeReminder = async () => {
       await reminderStorage.removeReminder(reminder)
-      navigation.navigate('Home')
+      navigation.navigate(constants.route.home)
     }
 
     const alert = {
@@ -56,7 +57,7 @@ const ReminderPage = ({ route }) => {
       id
         ? await reminderStorage.updateReminder(values)
         : await reminderStorage.addReminder(values)
-      navigation.navigate('Home')
+      navigation.navigate(constants.route.home)
     } catch (error) {
       console.log(error)
     }

@@ -17,6 +17,11 @@ const FormikTextInput = ({ name, title, layout, ...props }) => {
   const [field, meta, helpers] = useField(name)
   const showError = meta.touched && meta.error
 
+  const controlFocusEnd = async () => {
+    await helpers.setValue(field.value.trim())
+    helpers.setTouched(true)
+  }
+
   let Layout, Title, StyledTextInput
 
   switch (layout) {
@@ -44,7 +49,7 @@ const FormikTextInput = ({ name, title, layout, ...props }) => {
         <Title>{title}</Title>
         <StyledTextInput
           onChangeText={(value) => helpers.setValue(value)}
-          onBlur={() => helpers.setTouched(true)}
+          onBlur={controlFocusEnd}
           value={field.value}
           error={showError}
           {...props}

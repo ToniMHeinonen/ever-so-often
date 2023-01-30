@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 import _ from 'lodash'
 import { getReminderMaxDay } from '../../utils/reminderHandler'
+import constants from '../../utils/constants'
 
 yup.addMethod(yup.array, 'uniqueProperty', function (propertyPath, message) {
   return this.test('unique', '', function (list) {
@@ -50,17 +51,15 @@ yup.addMethod(yup.mixed, 'moreThanMaxDay', function () {
 })
 
 export const validationSchema = yup.object().shape({
-  name: yup.string().required('Name is required'),
+  name: yup.string().required(constants.validation.name),
   startDate: yup.date().required('Start date is required'),
-  endDate: yup
-    .date()
-    .min(yup.ref('startDate'), 'End date must be later than start date'),
+  endDate: yup.date().min(yup.ref('startDate'), constants.validation.endDate),
   timeFrame: yup.mixed().moreThanMaxDay(),
   activities: yup
     .array()
     .of(
       yup.object().shape({
-        name: yup.string().required('Name is required'),
+        name: yup.string().required(constants.validation.name),
         day: yup
           .number()
           .typeError('Day must be a number')

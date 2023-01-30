@@ -4,6 +4,7 @@ import {
   initialValues,
   initialActivity,
 } from '../../components/ReminderPage/ReminderForm'
+import constants from '../../utils/constants'
 
 describe('ReminderPage', () => {
   describe('ReminderForm', () => {
@@ -17,11 +18,11 @@ describe('ReminderPage', () => {
 
           await waitFor(() => {
             fireEvent.changeText(
-              getByPlaceholderText('Reminder name...'),
+              getByPlaceholderText(constants.placeholder.reminderName),
               'Reminder'
             )
             fireEvent.changeText(
-              getByPlaceholderText('Activity for the day...'),
+              getByPlaceholderText(constants.placeholder.activityName),
               'Activity'
             )
 
@@ -44,6 +45,28 @@ describe('ReminderPage', () => {
         })
       })
 
+      describe('modify reminder', () => {
+        it('throws error if end date is before start date', async () => {
+          const onSubmit = jest.fn()
+          const { queryByText } = render(
+            <ReminderFormContainer
+              onSubmit={onSubmit}
+              values={{
+                ...initialValues,
+                endDate: '2023/01/01',
+                startDate: '2023/01/02',
+              }}
+            />
+          )
+
+          fireEvent.press(queryByText('Save'))
+
+          await waitFor(() => {
+            expect(queryByText(constants.validation.endDate)).toBeVisible()
+          })
+        })
+      })
+
       it('throws error if names are not defined', async () => {
         const onSubmit = jest.fn()
         const { getByText, getAllByText } = render(
@@ -54,7 +77,7 @@ describe('ReminderPage', () => {
           fireEvent.press(getByText('Submit'))
         })
 
-        expect(getAllByText('Name is required').length).toBe(2)
+        expect(getAllByText(constants.validation.name).length).toBe(2)
       })
     })
   })

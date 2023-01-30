@@ -25,6 +25,7 @@ import Padding from '../../styles/Padding'
 import { validationSchema } from './validation'
 import { getFormattedNewDate } from '../../utils/reminderHandler'
 import GettingStarted from './GettingStarted'
+import constants from '../../utils/constants'
 
 export const initialActivity = {
   name: '',
@@ -89,7 +90,7 @@ const ReminderForm = ({ onSubmit, onRemove, values, newReminder }) => {
       <FormikTextInput
         name="name"
         title="Name"
-        placeholder="Reminder name..."
+        placeholder={constants.placeholder.reminderName}
         layout="horizontal"
       />
       <Padding paddingVertical={paddingHeight}>
@@ -123,7 +124,7 @@ const ReminderForm = ({ onSubmit, onRemove, values, newReminder }) => {
                 <Row>
                   <FormikTextInput
                     title="Name"
-                    placeholder="Activity for the day..."
+                    placeholder={constants.placeholder.activityName}
                     name={`activities[${index}].name`}
                     layout="vertical-left"
                   />

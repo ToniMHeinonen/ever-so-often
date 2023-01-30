@@ -26,12 +26,12 @@ import { validationSchema } from './validation'
 import { getFormattedNewDate } from '../../utils/reminderHandler'
 import GettingStarted from './GettingStarted'
 
-const initialActivity = {
+export const initialActivity = {
   name: '',
   day: 1,
 }
 
-const initialValues = {
+export const initialValues = {
   name: '',
   startDate: getFormattedNewDate(),
   endDate: '',

@@ -41,7 +41,7 @@ yup.addMethod(yup.mixed, 'moreThanMaxDay', function () {
     if (value < maxDay) {
       const error = this.createError({
         path: `${this.path}`,
-        message: 'Time frame must be at least the highest target day',
+        message: constants.validation.timeFrame,
       })
       throw new yup.ValidationError(error)
     }
@@ -52,7 +52,7 @@ yup.addMethod(yup.mixed, 'moreThanMaxDay', function () {
 
 export const validationSchema = yup.object().shape({
   name: yup.string().required(constants.validation.name),
-  startDate: yup.date().required('Start date is required'),
+  startDate: yup.date().required(constants.validation.startDate),
   endDate: yup.date().min(yup.ref('startDate'), constants.validation.endDate),
   timeFrame: yup.mixed().moreThanMaxDay(),
   activities: yup
@@ -62,11 +62,11 @@ export const validationSchema = yup.object().shape({
         name: yup.string().required(constants.validation.name),
         day: yup
           .number()
-          .typeError('Day must be a number')
-          .required('Day is required'),
+          .typeError(constants.validation.dayNumber)
+          .required(constants.validation.targetDay),
       })
     )
-    .uniqueProperty('day', 'Day must be unique')
-    .required('Activities are required')
-    .min(1, 'At least 1 activity is required'),
+    .uniqueProperty('day', constants.validation.dayUnique)
+    .required()
+    .min(1, constants.validation.activityCount),
 })

@@ -1,26 +1,30 @@
 import { differenceInDays, format } from 'date-fns'
 import _ from 'lodash'
+import { Activity, Reminder } from './types'
 
 /**
  * Retrieves maximum activity day for reminder.
- * @param {object} reminder reminder to check
- * @returns {number} maximum activity day or time frame if defined
+ * @param {Reminder} reminder reminder to check
+ * @returns {number} maximum activity day or time frame if defined, -1 if something went wrong
  */
-export const getReminderMaxDay = (reminder) => {
+export const getReminderMaxDay = (reminder: Reminder): number => {
   // Return time frame if defined, since it is always the highest value
   const timeFrame = reminder.timeFrame
-  if (timeFrame && timeFrame != '') return timeFrame
+  if (timeFrame) return timeFrame
 
-  return _.maxBy(reminder.activities, (a) => a.day).day
+  return _.maxBy(reminder.activities, (a) => a.day)?.day || -1
 }
 
 /**
  * Retrieves the reminder active day number.
- * @param {object} reminder reminder to check
+ * @param {Reminder} reminder reminder to check
  * @param {Date} currentDate current date
  * @returns {number} active day number
  */
-export const getReminderActiveDay = (reminder, currentDate) => {
+export const getReminderActiveDay = (
+  reminder: Reminder,
+  currentDate: Date
+): number => {
   const maxDay = getReminderMaxDay(reminder)
   const daysFromStartDate = differenceInDays(
     currentDate,
@@ -32,14 +36,17 @@ export const getReminderActiveDay = (reminder, currentDate) => {
 
 /**
  * Retrieves the active activity for reminder.
- * @param {object} reminder reminder to check
+ * @param {Reminder} reminder reminder to check
  * @param {Date} currentDate current date
- * @returns {object | undefined}found active activity, undefined if not active
+ * @returns {Activity | undefined}found active activity, undefined if not active
  */
-export const getActiveActivity = (reminder, currentDate) => {
+export const getActiveActivity = (
+  reminder: Reminder,
+  currentDate: Date
+): Activity | undefined => {
   // If end date has already passed, return undefined
   if (
-    reminder.endDate !== '' &&
+    reminder.endDate &&
     differenceInDays(new Date(reminder.endDate), currentDate) < 0
   ) {
     return undefined
@@ -51,11 +58,14 @@ export const getActiveActivity = (reminder, currentDate) => {
 
 /**
  * Sorts reminders by their active state.
- * @param {[object]} reminders reminders to sort
+ * @param {[Reminder]} reminders reminders to sort
  * @param {Date} currentDate current date
- * @returns {[object]} sorted reminders by active state, active reminders first
+ * @returns {[Reminder]} sorted reminders by active state, active reminders first
  */
-export const sortRemindersByActiveState = (reminders, currentDate) => {
+export const sortRemindersByActiveState = (
+  reminders: Reminder[],
+  currentDate: Date
+): Reminder[] => {
   const sorted = _.sortBy(
     reminders,
     (r) => getActiveActivity(r, currentDate) === undefined
@@ -65,11 +75,14 @@ export const sortRemindersByActiveState = (reminders, currentDate) => {
 
 /**
  * Splits reminders by their active state.
- * @param {[object]} reminders reminders to split
+ * @param {[Reminder]} reminders reminders to split
  * @param {Date} currentDate current date
- * @returns {[[object], [object]]} splitted reminders by active state, active in first array
+ * @returns {[[Reminder], [Reminder]]} splitted reminders by active state, active in first array
  */
-export const splitRemindersByActiveState = (reminders, currentDate) => {
+export const splitRemindersByActiveState = (
+  reminders: Reminder[],
+  currentDate: Date
+): [Reminder[], Reminder[]] => {
   const [active, inactive] = _.partition(
     reminders,
     (r) => getActiveActivity(r, currentDate) !== undefined
@@ -77,4 +90,5 @@ export const splitRemindersByActiveState = (reminders, currentDate) => {
   return [active, inactive]
 }
 
-export const getFormattedNewDate = () => format(new Date(), 'yyyy/MM/dd')
+export const getFormattedNewDate = (): string =>
+  format(new Date(), 'yyyy/MM/dd')

@@ -2,7 +2,7 @@ import TextButton from '../TextButton'
 import { dateButtonStyle, DateButtonTextStyle } from './style'
 
 const DateButton = ({ date, placeholder, setVisible }) => {
-  const showPlaceholder = date === ''
+  const showPlaceholder = !date || date === ''
 
   return (
     <TextButton

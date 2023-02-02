@@ -7,20 +7,30 @@ import AlertDialog from '../AlertDialog'
 import BottomAppBar from '../BottomAppBar'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useState } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import constants from '../../utils/constants'
+import {
+  DefaultTheme,
+  NavigationContainer,
+  Theme,
+} from '@react-navigation/native'
 
-const Stack = createNativeStackNavigator()
-
-const navigationTheme = {
+const navigationTheme: Theme = {
+  ...DefaultTheme,
   dark: true,
   colors: {
+    ...DefaultTheme.colors,
     primary: theme.colors.primary,
     background: theme.colors.appBackground,
   },
 }
 
-const Main = () => {
+export type RootStackParamList = {
+  Home: undefined
+  Reminder: { id: undefined }
+}
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
+
+const Main = (): JSX.Element => {
   const [state, setState] = useState()
 
   return (
@@ -32,19 +42,20 @@ const Main = () => {
         />
         <StatusBarStyle />
         <Stack.Navigator
-          initialRouteName={constants.route.home}
+          initialRouteName="Home"
           screenOptions={{ headerShown: false }}
           screenListeners={{
-            state: (e) => {
-              setState(e.data.state)
+            state: (e): void => {
+              // @ts-expect-error Unable to find solution to this error
+              setState(e.data?.state)
             },
           }}
         >
-          <Stack.Screen name={constants.route.home} component={HomePage} />
+          <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen
-            name={constants.route.reminder}
+            name="Reminder"
             component={ReminderPage}
-            initialParams={{}}
+            initialParams={{ id: undefined }}
           />
         </Stack.Navigator>
         <AlertDialog />

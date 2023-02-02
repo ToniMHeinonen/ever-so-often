@@ -3,21 +3,23 @@ import { ReminderFormContainer } from './ReminderForm'
 import { useEffect, useState } from 'react'
 import LoadingIcon from '../../styles/LoadingIcon'
 import { setAlert, useStateValue } from '../../state'
-import { useNavigation } from '@react-navigation/native'
-import constants from '../../utils/constants'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../Main'
+import { Reminder } from '../../utils/types'
 
-const ReminderPage = ({ route }) => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Reminder'>
+
+const ReminderPage: React.FC<Props> = ({ route, navigation }) => {
   const { id } = route.params
   const [, dispatch] = useStateValue()
-  const [reminder, setReminder] = useState(undefined)
+  const [reminder, setReminder] = useState<Reminder | undefined>(undefined)
   const reminderStorage = useReminderStorage()
-  const navigation = useNavigation()
 
   useEffect(() => {
     retrieveReminder()
   }, [])
 
-  const retrieveReminder = async () => {
+  const retrieveReminder = async (): Promise<void> => {
     if (!id) return
 
     try {
@@ -28,15 +30,15 @@ const ReminderPage = ({ route }) => {
     }
   }
 
-  const onRemove = async () => {
-    const removeReminder = async () => {
+  const onRemove = async (): Promise<void> => {
+    const removeReminder = async (): Promise<void> => {
       await reminderStorage.removeReminder(reminder)
-      navigation.navigate(constants.route.home)
+      navigation.navigate('Home')
     }
 
     const alert = {
       title: 'Remove Reminder',
-      message: `Are you sure you want to remove reminder "${reminder.name}"?`,
+      message: `Are you sure you want to remove reminder "${reminder?.name}"?`,
       buttons: [
         {
           text: 'Cancel',
@@ -52,12 +54,12 @@ const ReminderPage = ({ route }) => {
     dispatch(setAlert(alert))
   }
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: Reminder): Promise<void> => {
     try {
       id
         ? await reminderStorage.updateReminder(values)
         : await reminderStorage.addReminder(values)
-      navigation.navigate(constants.route.home)
+      navigation.navigate('Home')
     } catch (error) {
       console.log(error)
     }

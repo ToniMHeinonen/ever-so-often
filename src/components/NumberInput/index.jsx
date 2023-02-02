@@ -60,7 +60,7 @@ const NumberInput = ({
         style={[numberInputStyle, style, { minWidth: minWidth }]}
         onChangeText={onChange}
         onBlur={onFocusLost}
-        value={value.toString()}
+        value={value ? value.toString() : ''}
         maxLength={maxLength}
         // Use multiline to fix cursor jumping to right when input is modified to empty
         multiline

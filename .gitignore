@@ -10,5 +10,8 @@ npm-debug.*
 *.orig.*
 web-build/
 
+# ignore all log files
+*.log
+
 # macOS
 .DS_Store

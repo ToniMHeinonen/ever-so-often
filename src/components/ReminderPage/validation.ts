@@ -1,13 +1,27 @@
 import * as yup from 'yup'
 import _ from 'lodash'
-import { getReminderMaxDay } from '../../utils/reminderHandler'
+import { getActivitiesMaxDay } from '../../utils/reminderHandler'
 import constants from '../../utils/constants'
+import { AnyObject, Maybe } from 'yup/lib/types'
+
+declare module 'yup' {
+  interface ArraySchema<T> {
+    uniqueProperty(property: string, message: string): ArraySchema<T>
+  }
+  interface NumberSchema<
+    TType extends Maybe<number> = number | undefined,
+    TContext extends AnyObject = AnyObject,
+    TOut extends TType = TType
+  > extends yup.BaseSchema<TType, TContext, TOut> {
+    moreThanMaxDay(): NumberSchema<TType, TContext>
+  }
+}
 
 yup.addMethod(yup.array, 'uniqueProperty', function (propertyPath, message) {
   return this.test('unique', '', function (list) {
-    const errors = []
+    const errors: yup.ValidationError[] = []
 
-    list.forEach((item, index) => {
+    list?.forEach((item, index) => {
       const propertyValue = _.get(item, propertyPath)
 
       if (
@@ -31,12 +45,12 @@ yup.addMethod(yup.array, 'uniqueProperty', function (propertyPath, message) {
   })
 })
 
-yup.addMethod(yup.mixed, 'moreThanMaxDay', function () {
+yup.addMethod(yup.number, 'moreThanMaxDay', function () {
   return this.test('moreThanMaxDay', '', function (value) {
     // Check only if value has been provided
     if (!value) return true
 
-    const maxDay = getReminderMaxDay({ activities: this.parent.activities })
+    const maxDay = getActivitiesMaxDay(this.parent.activities)
 
     if (value < maxDay) {
       const error = this.createError({
@@ -54,7 +68,7 @@ export const validationSchema = yup.object().shape({
   name: yup.string().required(constants.validation.name),
   startDate: yup.date().required(constants.validation.startDate),
   endDate: yup.date().min(yup.ref('startDate'), constants.validation.endDate),
-  timeFrame: yup.mixed().moreThanMaxDay(),
+  timeFrame: yup.number().moreThanMaxDay(),
   activities: yup
     .array()
     .of(

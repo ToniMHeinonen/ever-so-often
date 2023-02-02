@@ -12,7 +12,16 @@ export const getReminderMaxDay = (reminder: Reminder): number => {
   const timeFrame = reminder.timeFrame
   if (timeFrame) return timeFrame
 
-  return _.maxBy(reminder.activities, (a) => a.day)?.day || -1
+  return getActivitiesMaxDay(reminder.activities)
+}
+
+/**
+ * Retrieves maximum activity day for activities list.
+ * @param {Activity[]} activities activities to check
+ * @returns {number} maximum activity day, -1 if something went wrong
+ */
+export const getActivitiesMaxDay = (activities: Activity[]): number => {
+  return _.maxBy(activities, (a) => a.day)?.day || -1
 }
 
 /**

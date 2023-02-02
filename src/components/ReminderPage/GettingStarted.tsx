@@ -3,10 +3,10 @@ import { setAlert, useStateValue } from '../../state'
 import TextButton from '../TextButton'
 import { gettingStartedButton, gettingStartedButtonText } from './style'
 
-const GettingStarted = () => {
+const GettingStarted = (): JSX.Element => {
   const [, dispatch] = useStateValue()
 
-  const showGettingStartedAlert = () => {
+  const showGettingStartedAlert = (): void => {
     const alert = {
       title: 'Getting Started',
       message: gettingStartedText,

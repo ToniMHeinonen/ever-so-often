@@ -13,19 +13,32 @@ import {
   Title,
 } from './style'
 
-const AlertDialog = () => {
+export interface Alert {
+  title: string
+  message: string
+  buttons: AlertButton[]
+  visible?: boolean
+}
+
+export interface AlertButton {
+  text: string
+  style?: string
+  onPress?: () => void
+}
+
+const AlertDialog = (): JSX.Element => {
   const [{ alert }, dispatch] = useStateValue()
 
-  const buttonPressed = (button) => {
+  const buttonPressed = (button: AlertButton): void => {
     button.onPress?.()
     closeDialog()
   }
 
-  const closeDialog = () => {
+  const closeDialog = (): void => {
     dispatch(setAlert({ ...alert, visible: false }))
   }
 
-  const getButtonStyle = (style) => {
+  const getButtonStyle = (style?: string): object => {
     switch (style) {
       case 'ok':
         return okStyle
@@ -56,10 +69,10 @@ const AlertDialog = () => {
             <Container>
               <Message>{alert?.message}</Message>
               <ButtonRow>
-                {alert?.buttons?.map((b) => (
+                {alert?.buttons?.map((b: AlertButton) => (
                   <DialogButton
                     key={b.text}
-                    onPress={() => buttonPressed(b)}
+                    onPress={(): void => buttonPressed(b)}
                     buttonStyle={getButtonStyle(b.style)}
                   >
                     {b.text}

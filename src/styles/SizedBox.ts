@@ -1,7 +1,13 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import styled from 'styled-components/native'
 import { css } from 'styled-components'
 
-const SizedBox = styled.View`
+interface Props {
+  width?: number
+  height?: number
+}
+
+const SizedBox = styled.View<Props>`
   ${({ width }) =>
     width &&
     css`

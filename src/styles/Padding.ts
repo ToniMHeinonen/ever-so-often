@@ -1,7 +1,18 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import styled from 'styled-components/native'
 import { css } from 'styled-components'
 
-const Padding = styled.View`
+interface Props {
+  padding?: number
+  paddingHorizontal?: number
+  paddingVertical?: number
+  paddingTop?: number
+  paddingBottom?: number
+  paddingRight?: number
+  paddingLeft?: number
+}
+
+const Padding = styled.View<Props>`
   ${({ padding }) =>
     padding &&
     css`

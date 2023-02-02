@@ -26,21 +26,40 @@ import { validationSchema } from './validation'
 import { getFormattedNewDate } from '../../utils/reminderHandler'
 import GettingStarted from './GettingStarted'
 import constants from '../../utils/constants'
+import { Activity, Reminder } from '../../utils/types'
 
-export const initialActivity = {
+export const initialActivity: Activity = {
   name: '',
   day: 1,
 }
 
-export const initialValues = {
+export const initialValues: Reminder = {
+  id: '',
   name: '',
   startDate: getFormattedNewDate(),
-  endDate: '',
-  timeFrame: '',
+  endDate: undefined,
+  timeFrame: undefined,
   activities: [initialActivity],
 }
 
-export const ReminderFormContainer = ({ onSubmit, onRemove, values }) => {
+export interface FormContainerProps {
+  onSubmit: (values: Reminder) => void
+  onRemove: () => void
+  values: Reminder | undefined
+}
+
+interface FormProps {
+  onSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void
+  onRemove: () => void
+  values: Reminder
+  newReminder: boolean
+}
+
+export const ReminderFormContainer = ({
+  onSubmit,
+  onRemove,
+  values,
+}: FormContainerProps): JSX.Element => {
   const valuesToUse = { ...initialValues, ...values }
   const newReminder = values === undefined
   return (
@@ -50,7 +69,7 @@ export const ReminderFormContainer = ({ onSubmit, onRemove, values }) => {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        {({ handleSubmit, values }) => (
+        {({ handleSubmit, values }): JSX.Element => (
           <ReminderForm
             onSubmit={handleSubmit}
             onRemove={onRemove}
@@ -63,7 +82,12 @@ export const ReminderFormContainer = ({ onSubmit, onRemove, values }) => {
   )
 }
 
-const ReminderForm = ({ onSubmit, onRemove, values, newReminder }) => {
+const ReminderForm = ({
+  onSubmit,
+  onRemove,
+  values,
+  newReminder,
+}: FormProps): JSX.Element => {
   const paddingHeight = 10
   const paddingLargeHeight = 15
 
@@ -117,7 +141,7 @@ const ReminderForm = ({ onSubmit, onRemove, values, newReminder }) => {
       </Padding>
       <FieldArray
         name="activities"
-        render={(arrayHelpers) => (
+        render={(arrayHelpers): JSX.Element => (
           <View>
             {values.activities.map((a, index) => (
               <View key={index}>
@@ -137,7 +161,7 @@ const ReminderForm = ({ onSubmit, onRemove, values, newReminder }) => {
                     size={18}
                     color={theme.colors.error}
                     styleComponent={RemoveActivityView}
-                    onPress={() => arrayHelpers.remove(index)}
+                    onPress={(): void => arrayHelpers.remove(index)}
                   />
                 </Row>
                 <SizedBox height={paddingHeight} />
@@ -145,7 +169,7 @@ const ReminderForm = ({ onSubmit, onRemove, values, newReminder }) => {
             ))}
             <IconButton
               name="add-circle"
-              onPress={() => arrayHelpers.push(initialActivity)}
+              onPress={(): void => arrayHelpers.push(initialActivity)}
             />
           </View>
         )}

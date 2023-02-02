@@ -1,9 +1,19 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import styled from 'styled-components/native'
 import { css } from 'styled-components'
 import { Text as NativeText } from 'react-native'
 import theme from '../components/theme'
 
-const Text = styled(NativeText)`
+interface Props {
+  color?: string
+  fontSize?: string
+  title?: boolean
+  bold?: boolean
+  tab?: boolean
+  center?: boolean
+}
+
+const Text = styled(NativeText)<Props>`
   color: ${theme.colors.textPrimary};
   font-size: ${theme.fontSizes.body};
 

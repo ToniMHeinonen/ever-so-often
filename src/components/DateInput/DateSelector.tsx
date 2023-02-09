@@ -11,7 +11,12 @@ const styles = StyleSheet.create({
   },
 })
 
-const DateSelector = ({ date, setDate }) => {
+interface Props {
+  date: string
+  setDate: (value: string) => void
+}
+
+const DateSelector = ({ date, setDate }: Props): JSX.Element => {
   return (
     <DatePicker
       options={{
@@ -27,7 +32,7 @@ const DateSelector = ({ date, setDate }) => {
       current={date}
       selected={date}
       style={styles.container}
-      onSelectedChange={(d) => {
+      onSelectedChange={(d): void => {
         if (date === d) return
         setDate(d)
       }}

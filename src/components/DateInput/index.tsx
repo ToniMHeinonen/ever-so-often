@@ -6,7 +6,13 @@ import DateButton from './DateButton'
 import DateHeader from './DateHeader'
 import DateSelector from './DateSelector'
 
-const DateInput = ({ date, setDate, placeholder }) => {
+interface Props {
+  date: string
+  setDate: (value: string) => void
+  placeholder?: string
+}
+
+const DateInput = ({ date, setDate, placeholder = '' }: Props): JSX.Element => {
   const [visible, setVisible] = useState(false)
 
   return (
@@ -19,7 +25,7 @@ const DateInput = ({ date, setDate, placeholder }) => {
       <Modal
         width={0.9}
         visible={visible}
-        onTouchOutside={() => setVisible(false)}
+        onTouchOutside={(): void => setVisible(false)}
         modalAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
         overlayBackgroundColor={theme.colors.appBackground}
         modalStyle={{

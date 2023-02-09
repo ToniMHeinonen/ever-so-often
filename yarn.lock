@@ -2402,6 +2402,13 @@
     "@types/react" "*"
     "@types/react-native" "*"
 
+"@types/react-native-modern-datepicker@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-native-modern-datepicker/-/react-native-modern-datepicker-1.0.1.tgz#45aa5ca95911027ce137d438be73db99088a8eff"
+  integrity sha512-sJXhq9p+J2rlRQrx2sxZRmK3gzlls7VEvZxjlTsfPfRq2OUhz3pbpT1e15DVWYRlUGvBBddjhKC638BcUX3+cg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-native@*", "@types/react-native@^0.71.1":
   version "0.71.1"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.71.1.tgz#215684a5117e2cc7a97425355e8962ad1a67cf0e"

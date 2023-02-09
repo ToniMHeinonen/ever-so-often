@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import styled, { css } from 'styled-components/native'
 import {
   formFieldBaseStyles,
@@ -17,7 +18,7 @@ export const DateHeaderContainer = styled.View`
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-bottom-width: 1.5px;
-  border-bottom-color: ${theme.colors.appBackground}
+  border-bottom-color: ${theme.colors.appBackground};
   align-items: center;
 `
 
@@ -51,7 +52,11 @@ export const dateButtonStyle = css`
   border-color: ${theme.colors.borderLight};
 `
 
-export const DateButtonTextStyle = styled(Text)`
+interface DateButtonTextProps {
+  placeholder?: string
+}
+
+export const DateButtonTextStyle = styled(Text)<DateButtonTextProps>`
   font-size: ${theme.fontSizes.body};
   padding: 4px 0;
   text-align: center;

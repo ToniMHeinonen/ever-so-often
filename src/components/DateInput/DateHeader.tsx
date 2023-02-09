@@ -8,8 +8,13 @@ import {
   DateHeaderCloseButton,
 } from './style'
 
-const DateHeader = ({ setVisible, setDate }) => {
-  const clearDate = () => {
+interface Props {
+  setVisible: (value: boolean) => void
+  setDate: (value: string) => void
+}
+
+const DateHeader = ({ setVisible, setDate }: Props): JSX.Element => {
+  const clearDate = (): void => {
     setDate('')
     setVisible(false)
   }
@@ -28,7 +33,7 @@ const DateHeader = ({ setVisible, setDate }) => {
         name="close-circle"
         size={22}
         styleComponent={DateHeaderCloseButton}
-        onPress={() => setVisible(false)}
+        onPress={(): void => setVisible(false)}
       />
     </DateHeaderContainer>
   )

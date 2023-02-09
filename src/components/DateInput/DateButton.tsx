@@ -1,7 +1,13 @@
 import TextButton from '../TextButton'
 import { dateButtonStyle, DateButtonTextStyle } from './style'
 
-const DateButton = ({ date, placeholder, setVisible }) => {
+interface Props {
+  date: string | undefined
+  placeholder: string
+  setVisible: (value: boolean) => void
+}
+
+const DateButton = ({ date, placeholder, setVisible }: Props): JSX.Element => {
   const showPlaceholder = !date || date === ''
 
   return (
@@ -9,7 +15,7 @@ const DateButton = ({ date, placeholder, setVisible }) => {
       buttonStyle={dateButtonStyle}
       textStyleComponent={DateButtonTextStyle}
       textProps={{ placeholder: showPlaceholder }}
-      onPress={() => setVisible(true)}
+      onPress={(): void => setVisible(true)}
     >
       {showPlaceholder ? placeholder : date}
     </TextButton>

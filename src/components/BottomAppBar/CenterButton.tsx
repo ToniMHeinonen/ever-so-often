@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
-import { Route } from '../../utils/types'
+import { Route, StackNavigation } from '../../utils/types'
 import IconButton from '../IconButton'
-import { StackNavigation } from '../Main'
 import { addButtonStyle } from './style'
 
 interface Props {

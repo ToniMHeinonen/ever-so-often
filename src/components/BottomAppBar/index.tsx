@@ -1,4 +1,4 @@
-import { NavRoutes } from '../Main'
+import { NavRoutes } from '../../utils/types'
 import CenterButton from './CenterButton'
 import {
   AppBarRow,

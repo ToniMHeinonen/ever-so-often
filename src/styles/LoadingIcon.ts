@@ -1,6 +1,6 @@
 import { ActivityIndicator } from 'react-native'
 import styled from 'styled-components/native'
-import theme from '../components/theme'
+import theme from '../utils/theme'
 
 const LoadingIcon = styled(ActivityIndicator).attrs({
   size: 'large',

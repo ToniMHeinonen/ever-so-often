@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import { customStyle, pressedContentColor } from '../../styles/fragments'
 import Text from '../../styles/Text'
-import theme from '../theme'
+import theme from '../../utils/theme'
 
 export const Container = styled.View`
   background-color: ${theme.colors.appBackground};

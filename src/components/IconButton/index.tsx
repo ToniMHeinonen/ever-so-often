@@ -1,6 +1,6 @@
 import { Pressable } from 'react-native'
 import { Container } from './style'
-import theme from '../theme'
+import theme from '../../utils/theme'
 import { Icon } from '../../styles/Icon'
 
 interface ButtonProps {

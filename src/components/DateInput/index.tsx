@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import Modal, { ModalContent, SlideAnimation } from 'react-native-modals'
-import theme from '../theme'
+import theme from '../../utils/theme'
 import DateButton from './DateButton'
 import DateHeader from './DateHeader'
 import DateSelector from './DateSelector'

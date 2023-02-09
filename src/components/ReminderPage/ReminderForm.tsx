@@ -19,7 +19,7 @@ import Text from '../../styles/Text'
 import FormikNumberInput from '../FormikNumberInput'
 import FormikArrayError from '../FormikArrayError'
 import IconButton from '../IconButton'
-import theme from '../theme'
+import theme from '../../utils/theme'
 
 import Padding from '../../styles/Padding'
 import { validationSchema } from './validation'

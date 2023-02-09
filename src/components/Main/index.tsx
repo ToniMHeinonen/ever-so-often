@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import { Container, StatusBarStyle } from './style'
-import theme from '../theme'
+import theme from '../../utils/theme'
 import HomePage from '../HomePage'
 import ReminderPage from '../ReminderPage'
 import AlertDialog from '../AlertDialog'

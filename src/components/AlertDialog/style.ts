@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/native'
 import { TitleTopCenter } from '../../styles/FormFieldTitle'
 import Text from '../../styles/Text'
 import TextButton from '../TextButton'
-import theme from '../theme'
+import theme from '../../utils/theme'
 
 export const Container = styled.View`
   background-color: ${theme.colors.contentBackground};

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native'
 import { pressedContentColor } from '../../styles/fragments'
-import theme from '../theme'
+import theme from '../../utils/theme'
 
 export const Container = styled.View`
   flex-direction: row;

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import theme from '../theme'
+import theme from '../../utils/theme'
 import Constants from 'expo-constants'
 
 export const Container = styled.View`

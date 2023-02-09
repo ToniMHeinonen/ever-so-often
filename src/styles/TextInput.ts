@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { TextInput as NativeTextInput, TextInputProps } from 'react-native'
-import theme from '../components/theme'
+import theme from '../utils/theme'
 import { customStyle, formFieldBaseStyles } from './fragments'
 
 const TextInput = styled(NativeTextInput).attrs<TextInputProps>({

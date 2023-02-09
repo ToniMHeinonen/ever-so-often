@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import Modal, { ModalContent, SlideAnimation } from 'react-native-modals'
 import { setAlert, useStateValue } from '../../state'
-import theme from '../theme'
+import theme from '../../utils/theme'
 import {
   ButtonRow,
   Container,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import DatePicker from 'react-native-modern-datepicker'
-import theme from '../theme'
+import theme from '../../utils/theme'
 
 const styles = StyleSheet.create({
   container: {

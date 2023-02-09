@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/native'
-import theme from '../theme'
+import theme from '../../utils/theme'
 import Text from '../../styles/Text'
 import { pressedContentColor } from '../../styles/fragments'
 import { Icon } from '../../styles/Icon'

@@ -2,7 +2,7 @@
 import styled from 'styled-components/native'
 import { css } from 'styled-components'
 import { Text as NativeText } from 'react-native'
-import theme from '../components/theme'
+import theme from '../utils/theme'
 
 interface Props {
   color?: string

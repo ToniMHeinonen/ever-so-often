@@ -5,7 +5,7 @@ import {
   pressedContentColor,
 } from '../../styles/fragments'
 import Text from '../../styles/Text'
-import theme from '../theme'
+import theme from '../../utils/theme'
 
 export const DateHeaderContainer = styled.View`
   ${formFieldBaseStyles}

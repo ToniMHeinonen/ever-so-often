@@ -6,13 +6,17 @@ import DateButton from './DateButton'
 import DateHeader from './DateHeader'
 import DateSelector from './DateSelector'
 
-interface Props {
+export interface DateInputProps {
   date: string
   setDate: (value: string) => void
   placeholder?: string
 }
 
-const DateInput = ({ date, setDate, placeholder = '' }: Props): JSX.Element => {
+const DateInput = ({
+  date,
+  setDate,
+  placeholder = '',
+}: DateInputProps): JSX.Element => {
   const [visible, setVisible] = useState(false)
 
   return (

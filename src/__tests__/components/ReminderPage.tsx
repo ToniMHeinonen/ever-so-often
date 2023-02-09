@@ -9,11 +9,17 @@ import constants from '../../utils/constants'
 describe('ReminderPage', () => {
   describe('ReminderForm', () => {
     describe('ReminderFormContainer', () => {
+      const defaultOnRemove = (): void => console.log('Remove')
+
       describe('new reminder', () => {
         it('calls on submit with defined names and initial values', async () => {
           const onSubmit = jest.fn()
           const { getByPlaceholderText, getByText } = render(
-            <ReminderFormContainer onSubmit={onSubmit} />
+            <ReminderFormContainer
+              onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
+              values={undefined}
+            />
           )
 
           await waitFor(() => {
@@ -47,7 +53,11 @@ describe('ReminderPage', () => {
         it('throws error if names are not defined', async () => {
           const onSubmit = jest.fn()
           const { getByText, getAllByText } = render(
-            <ReminderFormContainer onSubmit={onSubmit} />
+            <ReminderFormContainer
+              onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
+              values={undefined}
+            />
           )
 
           await waitFor(() => {
@@ -72,9 +82,10 @@ describe('ReminderPage', () => {
 
         it('throws error if end date is before start date', async () => {
           const onSubmit = jest.fn()
-          const { queryByText } = render(
+          const { getByText, queryByText } = render(
             <ReminderFormContainer
               onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
               values={{
                 ...reminder,
                 endDate: '2023/01/01',
@@ -83,7 +94,7 @@ describe('ReminderPage', () => {
             />
           )
 
-          fireEvent.press(queryByText('Save'))
+          fireEvent.press(getByText('Save'))
 
           await waitFor(() => {
             expect(queryByText(constants.validation.endDate)).toBeVisible()
@@ -92,9 +103,10 @@ describe('ReminderPage', () => {
 
         it('throws error if time frame is lower than highest day', async () => {
           const onSubmit = jest.fn()
-          const { queryByText } = render(
+          const { getByText, queryByText } = render(
             <ReminderFormContainer
               onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
               values={{
                 ...reminder,
                 timeFrame: 1,
@@ -109,7 +121,7 @@ describe('ReminderPage', () => {
             />
           )
 
-          fireEvent.press(queryByText('Save'))
+          fireEvent.press(getByText('Save'))
 
           await waitFor(() => {
             expect(queryByText(constants.validation.timeFrame)).toBeVisible()
@@ -118,9 +130,10 @@ describe('ReminderPage', () => {
 
         it('throws error if two target days have identical number', async () => {
           const onSubmit = jest.fn()
-          const { queryByText, queryAllByText } = render(
+          const { getByText, queryAllByText } = render(
             <ReminderFormContainer
               onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
               values={{
                 ...reminder,
                 activities: [
@@ -139,7 +152,7 @@ describe('ReminderPage', () => {
             />
           )
 
-          fireEvent.press(queryByText('Save'))
+          fireEvent.press(getByText('Save'))
 
           await waitFor(() => {
             expect(queryAllByText(constants.validation.dayUnique).length).toBe(
@@ -150,9 +163,10 @@ describe('ReminderPage', () => {
 
         it('throws error if there are no activities', async () => {
           const onSubmit = jest.fn()
-          const { queryByText } = render(
+          const { getByText, queryByText } = render(
             <ReminderFormContainer
               onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
               values={{
                 ...reminder,
                 activities: [],
@@ -160,7 +174,7 @@ describe('ReminderPage', () => {
             />
           )
 
-          fireEvent.press(queryByText('Save'))
+          fireEvent.press(getByText('Save'))
 
           await waitFor(() => {
             expect(
@@ -171,9 +185,10 @@ describe('ReminderPage', () => {
 
         it('throws error if start date is not defined', async () => {
           const onSubmit = jest.fn()
-          const { queryByText } = render(
+          const { getByText, queryByText } = render(
             <ReminderFormContainer
               onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
               values={{
                 ...reminder,
                 startDate: '',
@@ -181,7 +196,7 @@ describe('ReminderPage', () => {
             />
           )
 
-          fireEvent.press(queryByText('Save'))
+          fireEvent.press(getByText('Save'))
 
           await waitFor(() => {
             expect(queryByText(constants.validation.startDate)).toBeVisible()
@@ -190,22 +205,24 @@ describe('ReminderPage', () => {
 
         it('throws error if target day is not defined', async () => {
           const onSubmit = jest.fn()
-          const { queryByText } = render(
+          const { getByText, queryByText } = render(
             <ReminderFormContainer
               onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
               values={{
                 ...reminder,
                 activities: [
                   {
                     ...initialActivity,
-                    day: '',
+                    // @ts-expect-error testing wrong argument type
+                    day: undefined,
                   },
                 ],
               }}
             />
           )
 
-          fireEvent.press(queryByText('Save'))
+          fireEvent.press(getByText('Save'))
 
           await waitFor(() => {
             expect(queryByText(constants.validation.targetDay)).toBeVisible()
@@ -214,14 +231,16 @@ describe('ReminderPage', () => {
 
         it('throws error if target day is not a number', async () => {
           const onSubmit = jest.fn()
-          const { queryByText } = render(
+          const { getByText, queryByText } = render(
             <ReminderFormContainer
               onSubmit={onSubmit}
+              onRemove={defaultOnRemove}
               values={{
                 ...reminder,
                 activities: [
                   {
                     ...initialActivity,
+                    // @ts-expect-error testing wrong argument type
                     day: 'Text',
                   },
                 ],
@@ -229,7 +248,7 @@ describe('ReminderPage', () => {
             />
           )
 
-          fireEvent.press(queryByText('Save'))
+          fireEvent.press(getByText('Save'))
 
           await waitFor(() => {
             expect(queryByText(constants.validation.dayNumber)).toBeVisible()

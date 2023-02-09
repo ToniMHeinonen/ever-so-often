@@ -2,7 +2,11 @@ import { useField } from 'formik'
 import { View } from 'react-native'
 import FormikErrorText from '../../styles/FormikErrorText'
 
-const FormikArrayError = ({ name }) => {
+interface Props {
+  name: string
+}
+
+const FormikArrayError = ({ name }: Props): JSX.Element => {
   const [, meta] = useField(name)
 
   return (

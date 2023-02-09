@@ -1,4 +1,5 @@
 import { useField } from 'formik'
+import { TextInputProps } from 'react-native'
 import {
   TitleLeft,
   TitleTopCenter,
@@ -13,11 +14,22 @@ import {
   TextInputRow,
 } from './style'
 
-const FormikTextInput = ({ name, title, layout, ...props }) => {
+interface Props {
+  name: string
+  title: string
+  layout?: string
+}
+
+const FormikTextInput = ({
+  name,
+  title,
+  layout,
+  ...props
+}: Props & Partial<TextInputProps>): JSX.Element => {
   const [field, meta, helpers] = useField(name)
   const showError = meta.touched && meta.error
 
-  const controlFocusEnd = async () => {
+  const controlFocusEnd = async (): Promise<void> => {
     await helpers.setValue(field.value.trim())
     helpers.setTouched(true)
   }
@@ -48,10 +60,9 @@ const FormikTextInput = ({ name, title, layout, ...props }) => {
       <Layout>
         <Title>{title}</Title>
         <StyledTextInput
-          onChangeText={(value) => helpers.setValue(value)}
+          onChangeText={(value): void => helpers.setValue(value)}
           onBlur={controlFocusEnd}
           value={field.value}
-          error={showError}
           {...props}
         />
       </Layout>

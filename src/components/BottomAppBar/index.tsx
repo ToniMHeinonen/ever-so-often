@@ -1,3 +1,4 @@
+import { NavRoutes } from '../Main'
 import CenterButton from './CenterButton'
 import {
   AppBarRow,
@@ -6,14 +7,12 @@ import {
   RightSideContainer,
 } from './style'
 
-const BottomAppBar = ({ state }) => {
-  if (!state) return null
-
+const BottomAppBar = ({ routes }: NavRoutes): JSX.Element | null => {
   return (
     <AppBarRow>
       <LeftSideContainer />
       <CenterContainer>
-        <CenterButton pathname={state.routes[state.routes.length - 1].name} />
+        <CenterButton pathname={routes[routes.length - 1].name} />
       </CenterContainer>
       <RightSideContainer />
     </AppBarRow>

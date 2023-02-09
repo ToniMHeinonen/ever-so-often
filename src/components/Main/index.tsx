@@ -12,6 +12,7 @@ import {
   NavigationContainer,
   Theme,
 } from '@react-navigation/native'
+import { NavState, RootStackParamList } from '../../utils/types'
 
 const navigationTheme: Theme = {
   ...DefaultTheme,
@@ -23,15 +24,14 @@ const navigationTheme: Theme = {
   },
 }
 
-export type RootStackParamList = {
-  Home: undefined
-  Reminder: { id: undefined }
-}
-
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Main = (): JSX.Element => {
-  const [state, setState] = useState()
+  const [state, setState] = useState<NavState>({
+    state: {
+      routes: [{ name: 'Home' }],
+    },
+  })
 
   return (
     <Container>
@@ -46,21 +46,16 @@ const Main = (): JSX.Element => {
           screenOptions={{ headerShown: false }}
           screenListeners={{
             state: (e): void => {
-              // TODO: Find a fix for this
-              // @ts-expect-error Unable to find solution to this error
-              setState(e.data?.state)
+              const data = e.data as NavState
+              setState(data)
             },
           }}
         >
           <Stack.Screen name="Home" component={HomePage} />
-          <Stack.Screen
-            name="Reminder"
-            component={ReminderPage}
-            initialParams={{ id: undefined }}
-          />
+          <Stack.Screen name="Reminder" component={ReminderPage} />
         </Stack.Navigator>
         <AlertDialog />
-        <BottomAppBar state={state} />
+        <BottomAppBar routes={state.state.routes} />
       </NavigationContainer>
     </Container>
   )

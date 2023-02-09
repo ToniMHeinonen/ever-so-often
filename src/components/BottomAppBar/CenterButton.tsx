@@ -1,17 +1,22 @@
 import { useNavigation } from '@react-navigation/native'
-import constants from '../../utils/constants'
+import { Route } from '../../utils/types'
 import IconButton from '../IconButton'
+import { StackNavigation } from '../Main'
 import { addButtonStyle } from './style'
 
-const CenterButton = ({ pathname }) => {
-  const navigation = useNavigation()
+interface Props {
+  pathname: string
+}
 
-  const getProps = () => {
+const CenterButton = ({ pathname }: Props): JSX.Element => {
+  const navigation = useNavigation<StackNavigation>()
+
+  const getProps = (): { name: string; onPress: () => void } => {
     switch (pathname) {
-      case constants.route.home:
+      case Route.Home:
         return {
           name: 'add',
-          onPress: () => navigation.navigate(constants.route.reminder),
+          onPress: () => navigation.navigate(Route.Reminder, { id: undefined }),
         }
       default:
         return {

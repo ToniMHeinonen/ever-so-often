@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react'
 import LoadingIcon from '../../styles/LoadingIcon'
 import { setAlert, useStateValue } from '../../state'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { RootStackParamList } from '../Main'
-import { Reminder } from '../../utils/types'
+import { Reminder, RootStackParamList, Route } from '../../utils/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Reminder'>
 
@@ -37,7 +36,7 @@ const ReminderPage: React.FC<Props> = ({ route, navigation }) => {
       } else {
         throw Error('Reminder was undefined!')
       }
-      navigation.navigate('Home')
+      navigation.navigate(Route.Home)
     }
 
     const alert = {
@@ -63,7 +62,7 @@ const ReminderPage: React.FC<Props> = ({ route, navigation }) => {
       id
         ? await reminderStorage.updateReminder(values)
         : await reminderStorage.addReminder(values)
-      navigation.navigate('Home')
+      navigation.navigate(Route.Home)
     } catch (error) {
       console.log(error)
     }

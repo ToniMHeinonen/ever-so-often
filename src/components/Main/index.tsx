@@ -46,6 +46,7 @@ const Main = (): JSX.Element => {
           screenOptions={{ headerShown: false }}
           screenListeners={{
             state: (e): void => {
+              // TODO: Find a fix for this
               // @ts-expect-error Unable to find solution to this error
               setState(e.data?.state)
             },

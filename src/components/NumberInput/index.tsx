@@ -1,3 +1,4 @@
+import { TextInputProps } from 'react-native'
 import TextInput from '../../styles/TextInput'
 import IconButton from '../IconButton'
 import {
@@ -6,6 +7,18 @@ import {
   numberInputStyle,
   plusButtonStyle,
 } from './style'
+
+export interface NumberInputProps extends Omit<TextInputProps, 'onChange'> {
+  value: string
+  onChange?: (value: number | string) => void
+  onBlur?: () => void
+  minValue?: number
+  maxLength?: number
+  minWidth?: number
+  allowDecimals?: boolean
+  allowEmpty?: boolean
+  style?: object
+}
 
 const NumberInput = ({
   value,
@@ -18,32 +31,32 @@ const NumberInput = ({
   allowEmpty,
   style,
   ...props
-}) => {
-  const onFocusLost = () => {
+}: NumberInputProps): JSX.Element => {
+  const onFocusLost = (): void => {
     if (allowEmpty && value === '') return
 
     const textValue = Number(value)
     const limitedValue = parseNumber(textValue)
 
-    onChange(limitedValue)
-    onBlur()
+    onChange?.(limitedValue)
+    onBlur?.()
   }
 
-  const parseNumber = (value) => {
+  const parseNumber = (value: number): number => {
     const limited = isNaN(value) ? minValue : Math.max(value, minValue)
     return allowDecimals ? limited : Math.round(limited)
   }
 
-  const decrease = () => {
+  const decrease = (): void => {
     const textValue = Number(value)
     const num = parseNumber(textValue - 1)
-    onChange(num)
+    onChange?.(num)
   }
 
-  const increase = () => {
+  const increase = (): void => {
     const textValue = Number(value)
     const num = parseNumber(textValue + 1)
-    onChange(num)
+    onChange?.(num)
   }
 
   return (

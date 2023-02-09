@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
-import { TextInput as NativeTextInput } from 'react-native'
+import { TextInput as NativeTextInput, TextInputProps } from 'react-native'
 import theme from '../components/theme'
 import { customStyle, formFieldBaseStyles } from './fragments'
 
-const TextInput = styled(NativeTextInput).attrs({
+const TextInput = styled(NativeTextInput).attrs<TextInputProps>({
   placeholderTextColor: theme.colors.textSecondary,
 })`
   ${formFieldBaseStyles}

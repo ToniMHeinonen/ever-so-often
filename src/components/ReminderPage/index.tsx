@@ -32,7 +32,11 @@ const ReminderPage: React.FC<Props> = ({ route, navigation }) => {
 
   const onRemove = async (): Promise<void> => {
     const removeReminder = async (): Promise<void> => {
-      await reminderStorage.removeReminder(reminder)
+      if (reminder) {
+        await reminderStorage.removeReminder(reminder)
+      } else {
+        throw Error('Reminder was undefined!')
+      }
       navigation.navigate('Home')
     }
 

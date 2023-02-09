@@ -8,7 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "eslint ./src/**/*.{js,jsx,ts,tsx} App.js",
-    "test": "jest"
+    "test": "jest",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.17.3",

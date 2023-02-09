@@ -22,11 +22,8 @@ const TextButton = ({
   textStyleComponent,
   ...props
 }: Props): JSX.Element => {
-  // TODO: Make this work without using any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const ButtonStyle: any = buttonStyleComponent ?? Container
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const TextStyle: any = textStyleComponent ?? ButtonText
+  const ButtonStyle = buttonStyleComponent ?? Container
+  const TextStyle = textStyleComponent ?? ButtonText
 
   return (
     <Pressable onPress={onPress} {...props}>

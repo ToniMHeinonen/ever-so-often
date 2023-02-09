@@ -27,7 +27,7 @@ const navigationTheme: Theme = {
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Main = (): JSX.Element => {
-  const [state, setState] = useState<NavState>({
+  const [navState, setNavState] = useState<NavState>({
     state: {
       routes: [{ name: 'Home' }],
     },
@@ -47,7 +47,7 @@ const Main = (): JSX.Element => {
           screenListeners={{
             state: (e): void => {
               const data = e.data as NavState
-              setState(data)
+              setNavState(data)
             },
           }}
         >
@@ -55,7 +55,7 @@ const Main = (): JSX.Element => {
           <Stack.Screen name="Reminder" component={ReminderPage} />
         </Stack.Navigator>
         <AlertDialog />
-        <BottomAppBar routes={state.state.routes} />
+        <BottomAppBar routes={navState.state.routes} />
       </NavigationContainer>
     </Container>
   )

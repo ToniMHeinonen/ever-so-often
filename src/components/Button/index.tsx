@@ -1,13 +1,13 @@
 import { Pressable, View } from 'react-native'
 
 interface ButtonProps {
-  pressed: boolean
+  pressed?: boolean
 }
 
 interface Props {
   onPress: () => void
   component?: React.FC<ButtonProps>
-  children: React.ReactNode[]
+  children: React.ReactNode | React.ReactNode[]
 }
 
 const Button = ({ onPress, component, ...props }: Props): JSX.Element => {

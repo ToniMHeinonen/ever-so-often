@@ -2,6 +2,7 @@ import { getFormattedNewDate } from '../src/utils/reminderHandler'
 
 const initialReminders = [
   {
+    id: '',
     name: 'Cleaning day',
     startDate: getFormattedNewDate(),
     endDate: '',
@@ -13,6 +14,7 @@ const initialReminders = [
     ],
   },
   {
+    id: '',
     name: 'Workout',
     startDate: getFormattedNewDate(),
     endDate: '',

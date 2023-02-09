@@ -9,10 +9,31 @@ import {
   InactiveTitle,
   ReminderIcon,
 } from './style'
+import { Activity, Reminder as ReminderType } from '../../utils/types'
 
-const ActiveReminder = ({ reminder, activity, onPress }) => {
+interface ReminderBaseProps {
+  reminder: ReminderType
+  onPress: (id: string) => void
+}
+
+interface ActiveReminderProps extends ReminderBaseProps {
+  activity: Activity
+}
+
+interface ReminderProps extends ReminderBaseProps {
+  currentDate: Date
+}
+
+const ActiveReminder = ({
+  reminder,
+  activity,
+  onPress,
+}: ActiveReminderProps): JSX.Element => {
   return (
-    <Button onPress={() => onPress(reminder.id)} component={ActiveContainer}>
+    <Button
+      onPress={(): void => onPress(reminder.id)}
+      component={ActiveContainer}
+    >
       <Row>
         <ReminderIcon name="calendar" styleComponent={ReminderIcon} size={64} />
         <ActiveTextContainer>
@@ -24,15 +45,25 @@ const ActiveReminder = ({ reminder, activity, onPress }) => {
   )
 }
 
-const InactiveReminder = ({ reminder, onPress }) => {
+const InactiveReminder = ({
+  reminder,
+  onPress,
+}: ReminderBaseProps): JSX.Element => {
   return (
-    <Button onPress={() => onPress(reminder.id)} component={InactiveContainer}>
+    <Button
+      onPress={(): void => onPress(reminder.id)}
+      component={InactiveContainer}
+    >
       <InactiveTitle title>{reminder.name}</InactiveTitle>
     </Button>
   )
 }
 
-const Reminder = ({ reminder, currentDate, onPress }) => {
+const Reminder = ({
+  reminder,
+  currentDate,
+  onPress,
+}: ReminderProps): JSX.Element => {
   const activity = getActiveActivity(reminder, currentDate)
   return activity ? (
     <ActiveReminder reminder={reminder} activity={activity} onPress={onPress} />

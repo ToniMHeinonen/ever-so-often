@@ -8,25 +8,29 @@ import Text from '../../styles/Text'
 import TextButton from '../TextButton'
 import { debugButtonStyle } from './style'
 
-const DebugButtons = ({ onChange }) => {
+interface Props {
+  onChange: () => void
+}
+
+const DebugButtons = ({ onChange }: Props): JSX.Element => {
   const reminderStorage = useReminderStorage()
 
-  const addTestReminders = async () => {
+  const addTestReminders = async (): Promise<void> => {
     await reminderStorage.initializeReminders(testReminders)
     await onChange()
   }
 
-  const addActiveTestReminder = async () => {
+  const addActiveTestReminder = async (): Promise<void> => {
     await reminderStorage.addReminder(activeTestReminder)
     await onChange()
   }
 
-  const addInactiveTestReminder = async () => {
+  const addInactiveTestReminder = async (): Promise<void> => {
     await reminderStorage.addReminder(inactiveTestReminder)
     await onChange()
   }
 
-  const clearReminders = async () => {
+  const clearReminders = async (): Promise<void> => {
     await reminderStorage.clearReminders()
     await onChange()
   }

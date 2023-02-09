@@ -1,5 +1,6 @@
 const testReminders = [
   {
+    id: '',
     name: 'Cleaning day',
     startDate: '2022/01/01',
     endDate: '',
@@ -10,6 +11,7 @@ const testReminders = [
     ],
   },
   {
+    id: '',
     name: 'Workout',
     startDate: '2022/01/01',
     endDate: '',
@@ -20,6 +22,7 @@ const testReminders = [
     ],
   },
   {
+    id: '',
     name: 'Game practise',
     startDate: '2022/01/01',
     endDate: '',
@@ -30,12 +33,14 @@ const testReminders = [
     ],
   },
   {
+    id: '',
     name: 'Always inactive reminder',
     startDate: '2022/01/01',
     endDate: '',
     activities: [{ name: 'Never active', day: 9999 }],
   },
   {
+    id: '',
     name: 'Another inactive reminder',
     startDate: '2022/01/01',
     endDate: '',
@@ -44,6 +49,7 @@ const testReminders = [
 ]
 
 export const activeTestReminder = {
+  id: '',
   name: 'Active test reminder',
   startDate: '2022/01/01',
   endDate: '',
@@ -51,6 +57,7 @@ export const activeTestReminder = {
 }
 
 export const inactiveTestReminder = {
+  id: '',
   name: 'Inactive test reminder',
   startDate: '2022/01/01',
   endDate: '',

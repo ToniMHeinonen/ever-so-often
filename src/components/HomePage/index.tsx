@@ -8,13 +8,14 @@ import LoadingIcon from '../../styles/LoadingIcon'
 import SizedBox from '../../styles/SizedBox'
 import constants from '../../utils/constants'
 import { splitRemindersByActiveState } from '../../utils/reminderHandler'
+import { Reminder } from '../../utils/types'
 import DebugButtons from './DebugButtons'
 import ReminderList from './ReminderList'
 import { PageContainer } from './style'
 
-const HomePage = () => {
-  const [activeReminders, setActiveReminders] = useState([])
-  const [inactiveReminders, setInactiveReminders] = useState([])
+const HomePage = (): JSX.Element => {
+  const [activeReminders, setActiveReminders] = useState<Reminder[]>([])
+  const [inactiveReminders, setInactiveReminders] = useState<Reminder[]>([])
   const [loading, setLoading] = useState(true)
   const reminderStorage = useReminderStorage()
   const localStorage = useLocalStorage()
@@ -27,7 +28,7 @@ const HomePage = () => {
     }, [])
   )
 
-  const getReminders = async () => {
+  const getReminders = async (): Promise<void> => {
     const reminders = await reminderStorage.getReminders()
 
     if (reminders.length == 0 && !(await initialRemindersAdded())) {
@@ -45,7 +46,7 @@ const HomePage = () => {
     setLoading(false)
   }
 
-  const initialRemindersAdded = async () => {
+  const initialRemindersAdded = async (): Promise<boolean> => {
     const remindersInitialized = await localStorage.getItem(
       constants.localStorage.initialized,
       false

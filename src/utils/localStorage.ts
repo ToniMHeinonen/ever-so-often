@@ -9,14 +9,14 @@ class LocalStorage {
 
   async getItem(
     key: string,
-    defaultItem: object | null = null
-  ): Promise<object> {
+    defaultItem: unknown | null = null
+  ): Promise<unknown> {
     const item = await AsyncStorage.getItem(`${this.namespace}:${key}`)
 
     return item ? JSON.parse(item) : defaultItem
   }
 
-  async setItem(key: string, item: object): Promise<void> {
+  async setItem(key: string, item: unknown): Promise<void> {
     await AsyncStorage.setItem(`${this.namespace}:${key}`, JSON.stringify(item))
   }
 

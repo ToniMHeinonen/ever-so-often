@@ -14,7 +14,5 @@ jobs:
         run: yarn install
       - name: lint
         run: yarn run lint
-      - name: type check
-        run: yarn run type-check
       - name: test
         run: yarn test

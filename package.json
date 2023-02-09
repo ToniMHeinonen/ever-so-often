@@ -7,9 +7,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint ./src/**/*.{js,jsx,ts,tsx} App.js",
-    "test": "jest",
-    "type-check": "tsc --noEmit"
+    "eslint": "eslint ./src/**/*.{js,jsx,ts,tsx} App.js",
+    "type-check": "tsc --noEmit",
+    "lint": "yarn run eslint & yarn run type-check",
+    "test": "jest"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.17.3",

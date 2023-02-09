@@ -1,6 +1,7 @@
 import { getFormattedNewDate } from '../src/utils/reminderHandler'
+import { Reminder } from '../src/utils/types'
 
-const initialReminders = [
+const initialReminders: Reminder[] = [
   {
     id: '',
     name: 'Cleaning day',

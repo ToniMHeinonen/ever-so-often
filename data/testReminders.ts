@@ -1,4 +1,6 @@
-const testReminders = [
+import { Reminder } from '../src/utils/types'
+
+const testReminders: Reminder[] = [
   {
     id: '',
     name: 'Cleaning day',

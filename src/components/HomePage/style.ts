@@ -4,6 +4,7 @@ import Text from '../../styles/Text'
 import { pressedContentColor } from '../../styles/fragments'
 import { Icon } from '../../styles/Icon'
 import constants from '../../utils/constants'
+import ImageBackground from '../../styles/ImageBackground'
 
 export const PageContainer = styled.View`
   background-color: ${theme.colors.contentBackground};
@@ -15,7 +16,8 @@ export const ReminderSeparator = styled.View`
   padding: 10px 0px;
 `
 
-export const ReminderListContainer = styled.View`
+export const ReminderListContainer = styled(ImageBackground)`
+  margin: 5px;
   padding-bottom: 20px;
 `
 

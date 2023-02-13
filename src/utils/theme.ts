@@ -1,5 +1,7 @@
 import { Platform } from 'react-native'
 
+const radiusDefaultNumber = 7
+
 const theme = {
   colors: {
     textPrimary: '#e8e8e8',
@@ -31,7 +33,8 @@ const theme = {
     bold: '700',
   },
   borders: {
-    radiusDefault: '7px',
+    radiusDefaultNumber: radiusDefaultNumber,
+    radiusDefault: `${radiusDefaultNumber}px`,
     widthDefault: '1px',
     shadowWidth: '2px',
   },

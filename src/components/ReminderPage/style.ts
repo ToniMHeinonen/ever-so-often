@@ -5,14 +5,9 @@ import IconButton from '../IconButton'
 import TextButton from '../TextButton'
 import theme from '../../utils/theme'
 
-export const TopRow = styled.View`
-  flex-direction: row;
-  align-items: center;
-`
-
 export const Container = styled.View`
   background-color: ${theme.colors.contentBackground};
-  padding: 15px;
+  padding: 10px;
   // TODO: Add better way later for handling bottom app bar margin
   margin-bottom: ${constants.appBar.height + 'px'};
 `
@@ -22,6 +17,10 @@ export const gettingStartedButton = css`
   border-color: ${theme.colors.borderLight};
   padding: 3px;
   margin: 0px;
+  margin-right: 5px;
+  margin-top: 9px;
+
+  ${pressedContentColor}
 `
 
 export const Row = styled.View`

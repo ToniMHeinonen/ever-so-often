@@ -10,7 +10,6 @@ import {
   Row,
   SaveButton,
   saveButtonStyle,
-  TopRow,
   UpdateButtonsRow,
 } from './style'
 import SizedBox from '../../styles/SizedBox'
@@ -28,6 +27,7 @@ import { getFormattedNewDate } from '../../utils/reminderHandler'
 import GettingStarted from './GettingStarted'
 import constants from '../../utils/constants'
 import { Activity, Reminder } from '../../utils/types'
+import ImageBackground from '../../styles/ImageBackground'
 
 export const initialActivity: Activity = {
   name: '',
@@ -111,32 +111,34 @@ const ReminderForm = ({
 
   return (
     <Container>
-      <TopRow>
-        <FormikTextInput
-          name="name"
-          title="Name"
-          placeholder={constants.placeholder.reminderName}
-          layout="horizontal"
-        />
-        <GettingStarted />
-      </TopRow>
-      <Padding paddingVertical={paddingHeight}>
+      <ImageBackground>
         <Row>
-          <FormikDateInput name="startDate" title="Start Date" />
-          <FormikDateInput
-            name="endDate"
-            title="End Date"
-            placeholder="(optional)"
+          <FormikTextInput
+            name="name"
+            title="Name"
+            placeholder={constants.placeholder.reminderName}
+            layout="horizontal"
           />
+          <GettingStarted />
         </Row>
-      </Padding>
-      <FormikNumberInput
-        title="Time Frame"
-        name="timeFrame"
-        placeholder="(optional)"
-        minWidth={80}
-        allowEmpty
-      />
+        <Padding paddingVertical={paddingHeight}>
+          <Row>
+            <FormikDateInput name="startDate" title="Start Date" />
+            <FormikDateInput
+              name="endDate"
+              title="End Date"
+              placeholder="(optional)"
+            />
+          </Row>
+        </Padding>
+        <FormikNumberInput
+          title="Time Frame"
+          name="timeFrame"
+          placeholder="(optional)"
+          minWidth={80}
+          allowEmpty
+        />
+      </ImageBackground>
       <Padding paddingTop={paddingLargeHeight} paddingBottom={paddingHeight}>
         <Text title center>
           Activities
@@ -148,25 +150,27 @@ const ReminderForm = ({
           <View>
             {values.activities.map((a, index) => (
               <View key={index}>
-                <Row>
-                  <FormikTextInput
-                    title="Name"
-                    placeholder={constants.placeholder.activityName}
-                    name={`activities[${index}].name`}
-                    layout="vertical-left"
-                  />
-                  <FormikNumberInput
-                    title="Target Day"
-                    name={`activities[${index}].day`}
-                  />
-                  <IconButton
-                    name="close"
-                    size={18}
-                    color={theme.colors.error}
-                    styleComponent={RemoveActivityView}
-                    onPress={(): void => arrayHelpers.remove(index)}
-                  />
-                </Row>
+                <ImageBackground>
+                  <Row>
+                    <FormikTextInput
+                      title="Name"
+                      placeholder={constants.placeholder.activityName}
+                      name={`activities[${index}].name`}
+                      layout="vertical-left"
+                    />
+                    <FormikNumberInput
+                      title="Target Day"
+                      name={`activities[${index}].day`}
+                    />
+                    <IconButton
+                      name="close"
+                      size={18}
+                      color={theme.colors.error}
+                      styleComponent={RemoveActivityView}
+                      onPress={(): void => arrayHelpers.remove(index)}
+                    />
+                  </Row>
+                </ImageBackground>
                 <SizedBox height={paddingHeight} />
               </View>
             ))}

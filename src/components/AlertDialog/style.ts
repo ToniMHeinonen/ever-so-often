@@ -3,12 +3,16 @@ import { TitleTopCenter } from '../../styles/FormFieldTitle'
 import Text from '../../styles/Text'
 import TextButton from '../TextButton'
 import theme from '../../utils/theme'
+import { Dimensions } from 'react-native'
+
+const maxScreenHeight = Dimensions.get('window').height - 100
 
 export const Container = styled.View`
   background-color: ${theme.colors.contentBackground};
   border-radius: ${theme.borders.radiusDefault};
   border-color: ${theme.colors.borderLight};
   border-width: ${theme.borders.widthDefault};
+  max-height: ${maxScreenHeight + 'px'};
   margin-top: 0px;
 `
 
@@ -18,7 +22,10 @@ export const Title = styled(TitleTopCenter)`
   margin-right: 5px;
 `
 
-export const Message = styled(Text)`
+export const Message = styled(Text).attrs({
+  // Without this the scroll does not activate every time
+  onStartShouldSetResponder: (): boolean => true,
+})`
   margin: 15px 20px 0px 20px;
 `
 

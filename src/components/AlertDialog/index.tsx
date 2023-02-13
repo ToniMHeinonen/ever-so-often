@@ -1,5 +1,6 @@
 import { View } from 'react-native'
 import Modal, { ModalContent, SlideAnimation } from 'react-native-modals'
+import { ScrollView } from 'react-native'
 import { setAlert, useStateValue } from '../../state'
 import theme from '../../utils/theme'
 import {
@@ -67,7 +68,9 @@ const AlertDialog = (): JSX.Element => {
               {alert?.title}
             </Title>
             <Container>
-              <Message>{alert?.message}</Message>
+              <ScrollView>
+                <Message>{alert?.message}</Message>
+              </ScrollView>
               <ButtonRow>
                 {alert?.buttons?.map((b: AlertButton) => (
                   <DialogButton

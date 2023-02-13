@@ -1,9 +1,8 @@
 import { useField } from 'formik'
-import { View } from 'react-native'
 import { TitleTopCenter } from '../../styles/FormFieldTitle'
 import FormikErrorText from '../../styles/FormikErrorText'
 import NumberInput, { NumberInputProps } from '../NumberInput'
-import { numberInputStyle } from './style'
+import { Container, numberInputStyle } from './style'
 
 interface Props {
   name: string
@@ -19,7 +18,7 @@ const FormikNumberInput = ({
   const showError = meta.touched && meta.error
 
   return (
-    <View>
+    <Container>
       <TitleTopCenter>{title}</TitleTopCenter>
       <NumberInput
         {...props}
@@ -29,7 +28,7 @@ const FormikNumberInput = ({
         style={numberInputStyle}
       />
       {showError && <FormikErrorText>{meta.error}</FormikErrorText>}
-    </View>
+    </Container>
   )
 }
 

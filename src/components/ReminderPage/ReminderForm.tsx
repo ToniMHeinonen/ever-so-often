@@ -10,6 +10,8 @@ import {
   Row,
   SaveButton,
   saveButtonStyle,
+  TargetDayContainer,
+  TimeFrameContainer,
   UpdateButtonsRow,
 } from './style'
 import SizedBox from '../../styles/SizedBox'
@@ -131,13 +133,15 @@ const ReminderForm = ({
             />
           </Row>
         </Padding>
-        <FormikNumberInput
-          title="Time Frame"
-          name="timeFrame"
-          placeholder="(optional)"
-          minWidth={80}
-          allowEmpty
-        />
+        <TimeFrameContainer>
+          <FormikNumberInput
+            title="Time Frame"
+            name="timeFrame"
+            placeholder="(optional)"
+            minWidth={80}
+            allowEmpty
+          />
+        </TimeFrameContainer>
       </ImageBackground>
       <Padding paddingTop={paddingLargeHeight} paddingBottom={paddingHeight}>
         <Text title center>
@@ -158,10 +162,12 @@ const ReminderForm = ({
                       name={`activities[${index}].name`}
                       layout="vertical-left"
                     />
-                    <FormikNumberInput
-                      title="Target Day"
-                      name={`activities[${index}].day`}
-                    />
+                    <TargetDayContainer>
+                      <FormikNumberInput
+                        title="Target Day"
+                        name={`activities[${index}].day`}
+                      />
+                    </TargetDayContainer>
                     <SizedBox width={10} />
                     <IconButton
                       name="close"

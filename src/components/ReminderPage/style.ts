@@ -23,6 +23,15 @@ export const gettingStartedButton = css`
   ${pressedContentColor}
 `
 
+export const TimeFrameContainer = styled.View`
+  align-self: center;
+  width: 168px;
+`
+
+export const TargetDayContainer = styled.View`
+  width: 130px;
+`
+
 export const Row = styled.View`
   flex-direction: row;
   justify-content: space-between;

@@ -101,8 +101,8 @@ const ReminderForm = ({
       </SaveButton>
       <DeleteButton
         name="trash"
-        size={32}
-        color={theme.colors.error}
+        size={30}
+        color={theme.colors.remove}
         styleComponent={RemoveReminderView}
         onPress={onRemove}
       />
@@ -162,10 +162,11 @@ const ReminderForm = ({
                       title="Target Day"
                       name={`activities[${index}].day`}
                     />
+                    <SizedBox width={10} />
                     <IconButton
                       name="close"
-                      size={18}
-                      color={theme.colors.error}
+                      size={16}
+                      color={theme.colors.borderLight}
                       styleComponent={RemoveActivityView}
                       onPress={(): void => arrayHelpers.remove(index)}
                     />

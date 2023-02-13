@@ -36,7 +36,7 @@ export const UpdateButtonsRow = styled.View`
 
 const removeButtonStyle = css`
   border-width: ${theme.borders.widthDefault};
-  border-color: ${theme.colors.remove};
+  border-color: ${theme.colors.borderLight};
   border-radius: ${theme.borders.radiusDefault};
   background-color: ${theme.colors.appBackground};
   padding: 3px;
@@ -46,7 +46,9 @@ const removeButtonStyle = css`
 
 export const RemoveActivityView = styled.View`
   ${removeButtonStyle}
-  margin-top: 5px;
+  position: absolute;
+  top: -4px;
+  right: -4px;
 `
 
 export const SaveButton = styled(TextButton)`

@@ -10,6 +10,7 @@ import {
   Row,
   SaveButton,
   saveButtonStyle,
+  TopRow,
   UpdateButtonsRow,
 } from './style'
 import SizedBox from '../../styles/SizedBox'
@@ -110,13 +111,15 @@ const ReminderForm = ({
 
   return (
     <Container>
-      <GettingStarted />
-      <FormikTextInput
-        name="name"
-        title="Name"
-        placeholder={constants.placeholder.reminderName}
-        layout="horizontal"
-      />
+      <TopRow>
+        <FormikTextInput
+          name="name"
+          title="Name"
+          placeholder={constants.placeholder.reminderName}
+          layout="horizontal"
+        />
+        <GettingStarted />
+      </TopRow>
       <Padding paddingVertical={paddingHeight}>
         <Row>
           <FormikDateInput name="startDate" title="Start Date" />

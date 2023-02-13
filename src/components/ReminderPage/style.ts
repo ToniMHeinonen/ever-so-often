@@ -5,6 +5,11 @@ import IconButton from '../IconButton'
 import TextButton from '../TextButton'
 import theme from '../../utils/theme'
 
+export const TopRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
+
 export const Container = styled.View`
   background-color: ${theme.colors.contentBackground};
   padding: 15px;
@@ -15,13 +20,8 @@ export const Container = styled.View`
 export const gettingStartedButton = css`
   background-color: ${theme.colors.appBarBackground};
   border-color: ${theme.colors.borderLight};
-  margin-bottom: 15px;
-
-  ${pressedContentColor}
-`
-
-export const gettingStartedButtonText = css`
-  font-size: ${theme.fontSizes.body};
+  padding: 3px;
+  margin: 0px;
 `
 
 export const Row = styled.View`

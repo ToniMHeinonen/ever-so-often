@@ -1,7 +1,7 @@
 import { gettingStartedText } from '../../../data/tutorialTexts'
 import { setAlert, useStateValue } from '../../state'
-import TextButton from '../TextButton'
-import { gettingStartedButton, gettingStartedButtonText } from './style'
+import IconButton from '../IconButton'
+import { gettingStartedButton } from './style'
 
 const GettingStarted = (): JSX.Element => {
   const [, dispatch] = useStateValue()
@@ -22,13 +22,12 @@ const GettingStarted = (): JSX.Element => {
   }
 
   return (
-    <TextButton
-      buttonStyle={gettingStartedButton}
-      textStyle={gettingStartedButtonText}
+    <IconButton
+      name="help"
+      size={24}
       onPress={showGettingStartedAlert}
-    >
-      Getting Started
-    </TextButton>
+      style={gettingStartedButton}
+    />
   )
 }
 
